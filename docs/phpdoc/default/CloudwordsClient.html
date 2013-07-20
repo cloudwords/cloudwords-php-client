@@ -1,0 +1,1465 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class CloudwordsClient</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class CloudwordsClient</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../default/CloudwordsAPI.html">CloudwordsAPI</a></li>            </ul>
+        </p>
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Basic implementation of the Cloudwords API client.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Douglas Kim &lt;<a href="mailto:doug@cloudwords.com">doug@cloudwords.com</a>&gt;</li>
+				<li><span class="field">since:</span> 1.0</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_cloudwords_client.php.html">/cloudwords_client.php</a> (line <span class="field">37</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#AUTHORIZATION_HEADER" title="details" class="const-name">AUTHORIZATION_HEADER</a> = 					<span class="var-type"> 'Authorization: '</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#CONTENT_TYPE_HEADER" title="details" class="const-name">CONTENT_TYPE_HEADER</a> = 					<span class="var-type"> 'Content-Type: '</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#CONTENT_TYPE_JSON" title="details" class="const-name">CONTENT_TYPE_JSON</a> = 					<span class="var-type"> 'application/json'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#CONTENT_TYPE_MULTIPART_FORM_DATA" title="details" class="const-name">CONTENT_TYPE_MULTIPART_FORM_DATA</a> = 					<span class="var-type"> 'multipart/form-data'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#REQUEST_TYPE_GET" title="details" class="const-name">REQUEST_TYPE_GET</a> = 					<span class="var-type"> 'GET'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#REQUEST_TYPE_POST" title="details" class="const-name">REQUEST_TYPE_POST</a> = 					<span class="var-type"> 'POST'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#REQUEST_TYPE_PUT" title="details" class="const-name">REQUEST_TYPE_PUT</a> = 					<span class="var-type"> 'PUT'</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+									<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																																																																																																																				
+												<div class="method-definition">
+											<span class="method-result">CloudwordsClient</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$base_api_url</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$version</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$auth_token</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#create_project" title="details" class="method-name">create_project</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#download_file_from_metadata" title="details" class="method-name">download_file_from_metadata</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$metadata</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#download_master_translated_file" title="details" class="method-name">download_master_translated_file</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#download_reference_file" title="details" class="method-name">download_reference_file</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$document_id</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#download_source_file" title="details" class="method-name">download_source_file</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#download_translated_file" title="details" class="method-name">download_translated_file</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$language</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getAuthToken" title="details" class="method-name">getAuthToken</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getBaseUrlWithVersion" title="details" class="method-name">getBaseUrlWithVersion</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getConnectionTimeout" title="details" class="method-name">getConnectionTimeout</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getMaxTotalConnections" title="details" class="method-name">getMaxTotalConnections</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getSocketTimeout" title="details" class="method-name">getSocketTimeout</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_closed_projects" title="details" class="method-name">get_closed_projects</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_current_bid_request_for_project" title="details" class="method-name">get_current_bid_request_for_project</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_intended_uses" title="details" class="method-name">get_intended_uses</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_master_project_translated_file" title="details" class="method-name">get_master_project_translated_file</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_open_projects" title="details" class="method-name">get_open_projects</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_preferred_vendors" title="details" class="method-name">get_preferred_vendors</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_project" title="details" class="method-name">get_project</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_project_reference" title="details" class="method-name">get_project_reference</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$document_id</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_project_references" title="details" class="method-name">get_project_references</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_project_source" title="details" class="method-name">get_project_source</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_project_translated_file" title="details" class="method-name">get_project_translated_file</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$language</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_project_translated_files" title="details" class="method-name">get_project_translated_files</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_source_languages" title="details" class="method-name">get_source_languages</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_target_languages" title="details" class="method-name">get_target_languages</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#get_vendor" title="details" class="method-name">get_vendor</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$vendor_id</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#request_bids_for_project" title="details" class="method-name">request_bids_for_project</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$preferred_vendors</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$do_let_cloudwords_choose</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$do_auto_select_bid_from_vendor</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#update_project" title="details" class="method-name">update_project</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#update_project_reference" title="details" class="method-name">update_project_reference</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$document_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$zip_file</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#upload_project_reference" title="details" class="method-name">upload_project_reference</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$zip_file</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#upload_project_source" title="details" class="method-name">upload_project_source</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$zip_file</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">79</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Convenience constructor that provides default configuration.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">CloudwordsClient</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$base_api_url</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$version</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$auth_token</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$base_api_url</span><span class="var-description">: The base domain of the Cloudwords API</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$version</span><span class="var-description">: The version of the Cloudwords API to use</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$auth_token</span><span class="var-description">: The authorization token to validate identify when accessing the Cloudwords API</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcreate_project" id="create_project"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">create_project</span> (line <span class="line-number">222</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			create_project
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$params</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodcreate_project">CloudwordsAPI::create_project()</a></dt>
+						<dd>Create a new Cloudwords project.</dd>
+					</dl>
+			
+	</div>
+<a name="methoddownload_file_from_metadata" id="download_file_from_metadata"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">download_file_from_metadata</span> (line <span class="line-number">308</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			download_file_from_metadata
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$metadata</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$metadata</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methoddownload_file_from_metadata">CloudwordsAPI::download_file_from_metadata()</a></dt>
+						<dd>Convenience method to download the binary content of a Cloudwords file, provided that the contentPath inside the metadata is valid.</dd>
+					</dl>
+			
+	</div>
+<a name="methoddownload_master_translated_file" id="download_master_translated_file"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">download_master_translated_file</span> (line <span class="line-number">284</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			download_master_translated_file
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methoddownload_master_translated_file">CloudwordsAPI::download_master_translated_file()</a></dt>
+						<dd>Download the current master translated material binary for the specified Cloudwords project, provided that such translated  material exists for the project. The master project translation file contains all of the current project language(s)  translation in one bundled zip. To download an individual language translation file, use download_translated_file(int, language).</dd>
+					</dl>
+			
+	</div>
+<a name="methoddownload_reference_file" id="download_reference_file"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">download_reference_file</span> (line <span class="line-number">274</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			download_reference_file
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$document_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$document_id</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methoddownload_reference_file">CloudwordsAPI::download_reference_file()</a></dt>
+						<dd>Download the specified project reference material binary, provided that such reference material exists for the project.</dd>
+					</dl>
+			
+	</div>
+<a name="methoddownload_source_file" id="download_source_file"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">download_source_file</span> (line <span class="line-number">243</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			download_source_file
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methoddownload_source_file">CloudwordsAPI::download_source_file()</a></dt>
+						<dd>Download the source material binary for the specified project, provided that a source material exists for the project.</dd>
+					</dl>
+			
+	</div>
+<a name="methoddownload_translated_file" id="download_translated_file"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">download_translated_file</span> (line <span class="line-number">303</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			download_translated_file
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$language</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$language</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methoddownload_translated_file">CloudwordsAPI::download_translated_file()</a></dt>
+						<dd>Download the specified translated material binary for the specified Cloudwords project and target language, provided that such  translated material exists for the project.</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetAuthToken" id="getAuthToken"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAuthToken</span> (line <span class="line-number">183</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getAuthToken
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetBaseUrlWithVersion" id="getBaseUrlWithVersion"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getBaseUrlWithVersion</span> (line <span class="line-number">179</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Public methods</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getBaseUrlWithVersion
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetConnectionTimeout" id="getConnectionTimeout"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getConnectionTimeout</span> (line <span class="line-number">187</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getConnectionTimeout
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetMaxTotalConnections" id="getMaxTotalConnections"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getMaxTotalConnections</span> (line <span class="line-number">195</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getMaxTotalConnections
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetSocketTimeout" id="getSocketTimeout"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getSocketTimeout</span> (line <span class="line-number">191</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getSocketTimeout
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_closed_projects" id="get_closed_projects"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_closed_projects</span> (line <span class="line-number">208</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_closed_projects
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_closed_projects">CloudwordsAPI::get_closed_projects()</a></dt>
+						<dd>Get the list of closed projects in Cloudwords.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_current_bid_request_for_project" id="get_current_bid_request_for_project"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_current_bid_request_for_project</span> (line <span class="line-number">323</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_current_bid_request_for_project
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_current_bid_request_for_project">CloudwordsAPI::get_current_bid_request_for_project()</a></dt>
+						<dd>Get the current bid request for the specified project.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_intended_uses" id="get_intended_uses"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_intended_uses</span> (line <span class="line-number">355</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_intended_uses
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_intended_uses">CloudwordsAPI::get_intended_uses()</a></dt>
+						<dd>Get the list of target intended uses currently configured in Cloudwords.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_master_project_translated_file" id="get_master_project_translated_file"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_master_project_translated_file</span> (line <span class="line-number">279</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_master_project_translated_file
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_master_project_translated_file">CloudwordsAPI::get_master_project_translated_file()</a></dt>
+						<dd>Get the current master project translation file metadata, including a contentPath for downloading the actual binary file.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_open_projects" id="get_open_projects"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_open_projects</span> (line <span class="line-number">199</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_open_projects
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_open_projects">CloudwordsAPI::get_open_projects()</a></dt>
+						<dd>Get the list of open projects in Cloudwords.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_preferred_vendors" id="get_preferred_vendors"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_preferred_vendors</span> (line <span class="line-number">328</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_preferred_vendors
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_preferred_vendors">CloudwordsAPI::get_preferred_vendors()</a></dt>
+						<dd>Get the list of preferred vendors currently configured in Cloudwords.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_project" id="get_project"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_project</span> (line <span class="line-number">217</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_project
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_project">CloudwordsAPI::get_project()</a></dt>
+						<dd>Get the Cloudwords project associated with the unique Cloudwords project id.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_project_reference" id="get_project_reference"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_project_reference</span> (line <span class="line-number">269</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_project_reference
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$document_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$document_id</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_project_reference">CloudwordsAPI::get_project_reference()</a></dt>
+						<dd>Get the specified project reference material metadata. The metadata will contain a contentPath for  downloading the actual binary file.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_project_references" id="get_project_references"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_project_references</span> (line <span class="line-number">260</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_project_references
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_project_references">CloudwordsAPI::get_project_references()</a></dt>
+						<dd>Get the list of project reference material metadata for the specified Cloudwords project. Each item in the  returned list will contain a contentPath for downloading the respective binary file.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_project_source" id="get_project_source"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_project_source</span> (line <span class="line-number">238</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_project_source
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_project_source">CloudwordsAPI::get_project_source()</a></dt>
+						<dd>Get the project's source material for a Cloudwords file resource for the specified Cloudwords project id.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_project_translated_file" id="get_project_translated_file"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_project_translated_file</span> (line <span class="line-number">298</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_project_translated_file
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$language</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$language</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_project_translated_file">CloudwordsAPI::get_project_translated_file()</a></dt>
+						<dd>Get the the current translated project file metadata for the specified Cloudwords project and target language. The returned  metadata will contain a contentPath for downloading the actual binary files.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_project_translated_files" id="get_project_translated_files"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_project_translated_files</span> (line <span class="line-number">289</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_project_translated_files
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_project_translated_files">CloudwordsAPI::get_project_translated_files()</a></dt>
+						<dd>Get the list of current project language translation files' metadata for the specified Cloudwords project. Each metadata  representation in the list will be specific to a project target language and contain a contentPath for downloading the  respective binary file.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_source_languages" id="get_source_languages"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_source_languages</span> (line <span class="line-number">337</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_source_languages
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_source_languages">CloudwordsAPI::get_source_languages()</a></dt>
+						<dd>Get the list of source languages currently configured in Cloudwords.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_target_languages" id="get_target_languages"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_target_languages</span> (line <span class="line-number">346</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_target_languages
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_target_languages">CloudwordsAPI::get_target_languages()</a></dt>
+						<dd>Get the list of target languages currently configured in Cloudwords.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_vendor" id="get_vendor"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_vendor</span> (line <span class="line-number">364</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_vendor
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$vendor_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$vendor_id</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodget_vendor">CloudwordsAPI::get_vendor()</a></dt>
+						<dd>Get the Cloudwords vendor by the unique Cloudwords vendor id.</dd>
+					</dl>
+			
+	</div>
+<a name="methodrequest_bids_for_project" id="request_bids_for_project"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">request_bids_for_project</span> (line <span class="line-number">315</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			request_bids_for_project
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$preferred_vendors</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$do_let_cloudwords_choose</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$do_auto_select_bid_from_vendor</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$preferred_vendors</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$do_let_cloudwords_choose</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$do_auto_select_bid_from_vendor</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodrequest_bids_for_project">CloudwordsAPI::request_bids_for_project()</a></dt>
+						<dd>Request bids for the specified project. In order to request a bid for a project, a source material must be already uploaded for the project, and the project must be in a state where requesting bids is allowed.</dd>
+					</dl>
+			
+	</div>
+<a name="methodupdate_project" id="update_project"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">update_project</span> (line <span class="line-number">227</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			update_project
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$params</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodupdate_project">CloudwordsAPI::update_project()</a></dt>
+						<dd>Update the project specified in the input project id with the content represented by the input.</dd>
+					</dl>
+			
+	</div>
+<a name="methodupdate_project_reference" id="update_project_reference"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">update_project_reference</span> (line <span class="line-number">254</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			update_project_reference
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$document_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$zip_file</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$document_id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$zip_file</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodupdate_project_reference">CloudwordsAPI::update_project_reference()</a></dt>
+						<dd>Upload and replace project reference material for the specified Cloudwords project and specific reference material. The provided file must be a zip file.</dd>
+					</dl>
+			
+	</div>
+<a name="methodupload_project_reference" id="upload_project_reference"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">upload_project_reference</span> (line <span class="line-number">248</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			upload_project_reference
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$zip_file</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$zip_file</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodupload_project_reference">CloudwordsAPI::upload_project_reference()</a></dt>
+						<dd>Upload and add a new reference material for a given Cloudwords project. The provided file must be a zip file.</dd>
+					</dl>
+			
+	</div>
+<a name="methodupload_project_source" id="upload_project_source"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">upload_project_source</span> (line <span class="line-number">232</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			upload_project_source
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$project_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$zip_file</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$project_id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$zip_file</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/CloudwordsAPI.html#methodupload_project_source">CloudwordsAPI::upload_project_source()</a></dt>
+						<dd>Upload the source material for a given Cloudwords project. The provided file must be a zip file.</dd>
+					</dl>
+			
+	</div>
+						
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constAUTHORIZATION_HEADER" id="AUTHORIZATION_HEADER"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">AUTHORIZATION_HEADER</span>
+			 = <span class="const-default"> 'Authorization: '</span>
+			(line <span class="line-number">42</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constants</p>
+	
+	
+</div>
+<a name="constCONTENT_TYPE_HEADER" id="CONTENT_TYPE_HEADER"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">CONTENT_TYPE_HEADER</span>
+			 = <span class="const-default"> 'Content-Type: '</span>
+			(line <span class="line-number">43</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constCONTENT_TYPE_JSON" id="CONTENT_TYPE_JSON"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">CONTENT_TYPE_JSON</span>
+			 = <span class="const-default"> 'application/json'</span>
+			(line <span class="line-number">44</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constCONTENT_TYPE_MULTIPART_FORM_DATA" id="CONTENT_TYPE_MULTIPART_FORM_DATA"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">CONTENT_TYPE_MULTIPART_FORM_DATA</span>
+			 = <span class="const-default"> 'multipart/form-data'</span>
+			(line <span class="line-number">45</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREQUEST_TYPE_GET" id="REQUEST_TYPE_GET"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">REQUEST_TYPE_GET</span>
+			 = <span class="const-default"> 'GET'</span>
+			(line <span class="line-number">46</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREQUEST_TYPE_POST" id="REQUEST_TYPE_POST"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">REQUEST_TYPE_POST</span>
+			 = <span class="const-default"> 'POST'</span>
+			(line <span class="line-number">47</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREQUEST_TYPE_PUT" id="REQUEST_TYPE_PUT"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">REQUEST_TYPE_PUT</span>
+			 = <span class="const-default"> 'PUT'</span>
+			(line <span class="line-number">48</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+						
+		</div>
+	</div>
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon, 22 Aug 2011 16:38:30 -0700 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

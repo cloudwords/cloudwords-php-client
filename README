@@ -1,0 +1,30 @@
+Contents of Cloudwords API PHP SDK
+----------------------------------
+1. Documentation
+    Full documentation is available at http://www.cloudwords.com/developers
+
+2. Source Code
+    src/cloudwords_api.php
+        The Cloudwords PHP API interface distributed as a standalone PHP file.  This file contains all method declaration used to interact with the Cloudwords API.
+    src/cloudwords_client.php
+        The Cloudwords PHP API client distributed as a standalone PHP file.  This file contains an implementation of the Cloudwords API interface.
+
+3. Example Code
+    examples/example.php
+        Example code to be used as reference material.
+
+4. PHP Documentation
+    docs/phpdoc
+        Uncompressed directory containing PHP documentation for the Cloudwords PHP API client.
+
+Dependencies
+------------
+1. Packages
+    The Cloudwords API PHP SDK depends on having the following packages installed:
+        php5
+            The PHP scripting library itself.  The recommended version to install is 5.3.2.
+        php5-curl
+            Curl module for php5.  Used to interact with the Cloudwords API.
+        php5-cli
+            Command-line interpreter for PHP.  Used to run the example script from the command line.
+
