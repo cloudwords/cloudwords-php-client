@@ -1015,6 +1015,8 @@ class CloudwordsProject {
   private $intendedUse;
   private $sourceLanguage;
   private $targetLanguages;
+  private $owner;
+  private $followers;
   private $status;
   private $bidDueDate;
   private $deliveryDueDate;
@@ -1034,8 +1036,11 @@ class CloudwordsProject {
    * - poNumber: string The project purchase order number
    * - intendedUse: int The project intended use unique identifier
    * - sourceLanguage: string The language code for the source language
-   * - targetLanguages: array The language codes for target languages 
+   * - targetLanguages: array The language codes for target languages
+   * - department: array The project department code and display name
    * - status: array The project status code and display name
+   * - owner: array The project owner code and display name
+   * - followers: array The project followers
    * - bidDueDate: string The project bid due date
    * - deliveryDueDate: string The project delivery due date
    * - createdDate: string The project created date
@@ -1073,6 +1078,15 @@ class CloudwordsProject {
     }
     if( isset($params['status']) ) {
       $this->status = new CloudwordsProjectStatus($params['status']);
+    }
+    if( isset($params['department']) ) {
+      $this->department = new CloudwordsDepartment($params['department']);
+    }
+    if( isset($params['owner']) ) {
+      $this->owner = new CloudwordsUser($params['owner']);
+    }
+    if( isset($params['followers']) ) {
+      $this->followers = $this->transformFollowerList($params['followers']);
     }
     if( isset($params['bidDueDate']) ) {
       $this->bidDueDate = $params['bidDueDate'];
@@ -1174,6 +1188,30 @@ class CloudwordsProject {
     $this->status = $status;
   }
 
+  public function getDepartment() {
+    return $this->department;
+  }
+
+  public function setDepartment($department) {
+    $this->department = $department;
+  }
+
+  public function getFollowers() {
+    return $this->followers;
+  }
+
+  public function setFollowers($followers) {
+    $this->followers = $followers;
+  }
+  
+  public function getOwner() {
+    return $this->owner;
+  }
+
+  public function setOwner($owner) {
+    $this->status = $owner;
+  }
+  
   public function getBidDueDate() {
     return $this->bidDueDate;
   }
@@ -1230,6 +1268,13 @@ class CloudwordsProject {
     return $languages;
   }
 
+  private function transformFollowerList($followerList) {
+    $followers = array();
+    foreach( $followerList as $follower ) {
+      $followers[] = new CloudwordsUser($follower);
+    }
+    return $followers;
+  }
 }
 
 /**
@@ -1276,6 +1321,65 @@ class CloudwordsProjectStatus {
     $this->code = $code;
   }
 
+}
+
+/**
+ * Represents the value for a project owner field in Cloudwords.
+ * 
+ * @author Dolly Aswin <dolly.aswin@gmail.com>
+ * @since 1.0
+ */
+class CloudwordsUser {
+
+  private $id;
+  private $firstName;
+  private $lastName;
+
+  /**
+   * Constructor used to create a Cloudwords project status
+   *
+   * - id: int The project status id name
+   * - firstName: string The project status internal firstName
+   * - lastName: string The project status internal lastName
+   *
+   * @param array $params The parameters used to initialize a project status instance
+   */
+  public function __construct($params) {
+    if( isset($params['id']) ) {
+      $this->id = $params['id'];
+    }
+    if( isset($params['firstName']) ) {
+      $this->firstName = $params['firstName'];
+    }
+    if( isset($params['lastName']) ) {
+      $this->lastName = $params['lastName'];
+    }
+  }
+
+  public function getId() {
+    return $this->id;
+  }
+
+  public function setId($id) {
+    $this->id = $id;
+  }
+
+  public function getFirstName() {
+    return $this->firstName;
+  }
+
+  public function setFirstName($firstName) {
+    $this->firstName = $firstName;
+  }
+
+
+  public function getLastName() {
+    return $this->lastName;
+  }
+
+  public function setLastName($lastName) {
+    $this->lastName = $lastName;
+  }
 }
 
 /**
@@ -1338,3 +1442,48 @@ class CloudwordsVendor {
 
 }
 
+/**
+ * Represents a department resource in Cloudwords. A department is assigned to a Cloudwords
+ * project in order to provide the necessary translation services.
+ * 
+ * @author Dolly Aswin <dolly.aswin@gmail.com>
+ * @since 1.0
+ */
+class CloudwordsDepartment {
+
+  private $id;
+  private $name;
+
+  /**
+   * Constructor used to create a Cloudwords vendor
+   *
+   * - id: int The vendor id
+   * - name: string The vendor name
+   *
+   * @param array $params The parameters used to initialize a vendor instance
+   */
+  public function __construct($params) {
+    if( isset($params['id']) ) {
+      $this->id = $params['id'];
+    }
+    if( isset($params['name']) ) {
+      $this->name = $params['name'];
+    }
+  }
+
+  public function getId() {
+    return $this->id;
+  }
+
+  public function setId($id) {
+    $this->id = $id;
+  }
+
+  public function getName() {
+    return $this->name;
+  }
+
+  public function setName($name) {
+    $this->name = $name;
+  }
+}
