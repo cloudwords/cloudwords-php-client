@@ -25,7 +25,6 @@ const AUTHENTICATION_TOKEN = 'UserToken <ENTER_AUTHORIZATION_TOKEN_HERE>';
 
 $client = new CloudwordsClient(BASE_API_URL, API_VERSION, AUTHENTICATION_TOKEN);
 
-// create a new project
+// get bid detail from a project
 $bidItems = $client->get_bid(10193, 7787);
 print_r($bidItems);
-
