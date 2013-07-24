@@ -462,6 +462,7 @@ class CloudwordsBid {
   private $status;
   private $description;
   private $amount;
+  private $bidItems;
 
   /**
    * Constructor used to create a Cloudwords bid request
@@ -471,6 +472,7 @@ class CloudwordsBid {
    * - status: array The bid status
    * - description: string The description provided by the vendor for this bid
    * - amount: string The total amount of this bid
+   * - bidItems: array The bidItem associated with this bid
    *
    * @param array $params The parameters used to initialize a bid instance
    */
@@ -489,6 +491,9 @@ class CloudwordsBid {
     }
     if( isset($params['amount']) ) {
       $this->amount = $params['amount'];
+    }
+    if( isset($params['bidItems']) ) {
+      $this->bidItems = $this->transformBidItems($params['bidItems']);
     }
   }
 
@@ -531,7 +536,14 @@ class CloudwordsBid {
   public function setAmount($amount) {
     $this->amount = $amount;
   }
-
+  
+  private function transformBidItems($bidItemList) {
+    $bidItems = array();
+    foreach( $bidItemList as $bidItem ) {
+      $bidItems[] = new CloudwordsBidItem($bidItem);
+    }
+    return $bidItems;
+  }
 }
 
 /**
@@ -685,6 +697,147 @@ class CloudwordsBidStatus {
     $this->code = $code;
   }
 
+}
+
+/**
+ * Represents a bid item provided by a vendor for a given Cloudwords bid item
+ * 
+ * @author Dolly Aswin <dolly.aswin@gmail.com>
+ * @since 1.0
+ */
+class CloudwordsBidItem {
+  private $id;
+  private $language;
+  private $isLanguageRemoved;
+  private $bidItemTasks;
+
+  /**
+   * Constructor used to create a Cloudwords bid item request
+   *
+   * - id: string The unique id associated with this bid item
+   * - language: array The bid language
+   * - isLanguageRemoved: boolean Option
+   * - bidItemTasks: array The bid item task associated with this bid item
+   *
+   * @param array $params The parameters used to initialize a bid instance
+   */
+  public function __construct($params) {
+    if( isset($params['id']) ) {
+      $this->id = $params['id'];
+    }
+    if( isset($params['language']) ) {
+      $this->language = new CloudwordsLanguage($params['language']);
+    }
+    if( isset($params['isLanguageRemoved']) ) {
+      $this->isLanguageRemoved = $params['isLanguageRemoved'];
+    }
+  	if( isset($params['bidItemTasks']) ) {
+      $this->bidItemTasks = $this->transformBidItemTasks($params['bidItemTasks']);
+    }
+  }
+
+  public function getId() {
+    return $this->id;
+  }
+
+  public function setId($id) {
+    $this->id = $id;
+  }
+  
+  public function getLanguage() {
+    return $this->language;
+  }
+
+  public function setLanguage($language) {
+  	$this->language = $language;
+  }
+
+  public function getIsLanguageRemoved() {
+	return $this->isLanguageRemoved;
+  }
+
+  public function setIsLanguageRemoved($isLanguageRemoved) {
+	$this->isLanguageRemoved = $isLanguageRemoved;
+  }
+  
+  private function transformBidItemTasks($bidItemTasksList) {
+    $bidItemTasks = array();
+    foreach( $bidItemTasksList as $bidItemTask ) {
+      $bidItemsTasks[] = new CloudwordsBidItemTask($bidItemTask);
+    }
+    
+    return $bidItemsTasks;
+  }
+}
+
+/**
+ * Represents a bid item task provided by a vendor for a given Cloudwords bid item
+ * 
+ * @author Dolly Aswin <dolly.aswin@gmail.com>
+ * @since 1.0
+ */
+class CloudwordsBidItemTask {
+  private $id;
+  private $attributes;
+  private $cost;
+  private $projectTaskType;
+
+  /**
+   * Constructor used to create a Cloudwords bid item request
+   *
+   * - id: string The unique id associated with this bid item
+   * - attribute: array The bid language
+   * - projectTaskType: array The task type associated with this bid item task
+   * - cost: string The cost of task
+   *
+   * @param array $params The parameters used to initialize a bid instance
+   */
+  public function __construct($params) {
+    if( isset($params['id']) ) {
+      $this->id = $params['id'];
+    }
+    if( isset($params['attributes']) ) {
+      $this->attributes = $params['attributes'];
+    }
+    if( isset($params['cost']) ) {
+      $this->cost = $params['cost'];
+    }
+  	if( isset($params['projectTaskType']) ) {
+      $this->projectTaskType = new CloudwordsProjectTaskType($params['projectTaskType']);
+    }
+  }
+
+  public function getId() {
+    return $this->id;
+  }
+
+  public function setId($id) {
+    $this->id = $id;
+  }
+  
+  public function getAttributes() {
+	return $this->attributes;
+  }
+
+  public function setAttributes($attributes) {
+	$this->attributes = $attributes;
+  }
+
+  public function getCost() {
+	return $this->cost;
+  }
+
+  public function setCost($cost) {
+  	$this->cost = $cost;
+  }
+
+  public function getProjectTaskType() {
+	return $this->projectTaskType;
+  }
+
+  public function setProjectTaskType($projectTaskType) {
+  	$this->projectTaskType = $projectTaskType;
+  }
 }
 
 /**
@@ -1321,6 +1474,64 @@ class CloudwordsProjectStatus {
     $this->code = $code;
   }
 
+}
+
+/**
+ * Represents a Vendor work item for a Project
+ * 
+ * @author Dolly Aswin <dolly.aswin@gmail.com>
+ * @since 1.0
+ */
+class CloudwordsProjectTaskType {
+
+  private $display;
+  private $parentType;
+  private $type; 
+
+  /**
+   * Constructor used to create a Cloudwords project status
+   *
+   * - display: string The project task type display name
+   * - parentType: string The project task type parent
+   * - type: string The project task type
+   *
+   * @param array $params The parameters used to initialize a project status instance
+   */
+  public function __construct($params) {
+    if( isset($params['display']) ) {
+      $this->display = $params['display'];
+    }
+    if( isset($params['parentType']) ) {
+      $this->parentType = $params['parentType'];
+    }
+    if( isset($params['type']) ) {
+      $this->type = $params['type'];
+    }
+  }
+
+  public function getDisplay() {
+    return $this->display;
+  }
+
+  public function setDisplay($display) {
+    $this->display = $display;
+  }
+  
+  public function getParentType() {
+	return $this->parentType;
+  }
+
+  public function setParentType($parentType) {
+	$this->parentType = $parentType;
+  }
+
+  public function getType() {
+	return $this->type;
+  }
+
+  public function setType($type) {
+	$this->type = $type;
+  }
 }
 
 /**
