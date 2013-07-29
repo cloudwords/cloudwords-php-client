@@ -1,7 +1,9 @@
 <?php
 namespace Cloudwords\Resources;
 
-use ProjectTaskType;
+require_once 'ProjectTaskType.php';
+
+use Cloudwords\Resources\ProjectTaskType as ProjectTaskType;
 
 /**
  * Represents a bid item task provided by a vendor for a given Cloudwords bid item

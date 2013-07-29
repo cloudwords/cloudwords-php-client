@@ -1,8 +1,11 @@
 <?php
 namespace Cloudwords\Resources;
 
-use BidItemTask,
-    Language;
+require_once 'BidItemTask.php';
+require_once 'Language.php';
+
+use Cloudwords\Resources\Language as Language,
+    Cloudwords\Resources\BidItemTask as BidItemTask;
 
 /**
  * Represents a bid item provided by a vendor for a given Cloudwords bid item

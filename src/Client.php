@@ -18,9 +18,23 @@
 namespace Cloudwords;
 
 require_once 'Exception.php';
+require_once 'Resources/LanguageFile.php';
+require_once 'Resources/Language.php';
+require_once 'Resources/BidRequest.php';
+require_once 'Resources/IntendedUse.php';
 require_once 'Resources/Project.php';
+require_once 'Resources/Vendor.php';
+require_once 'Resources/File.php';
+require_once 'Resources/Bid.php';
 use Cloudwords\Exception as ApiException,
-    Cloudwords\Resources\Project as Project;
+    Cloudwords\Resources\LanguageFile as LanguageFile,
+    Cloudwords\Resources\Language as Language,
+    Cloudwords\Resources\BidRequest as BidRequest,
+    Cloudwords\Resources\IntendedUse as IntendedUse,
+    Cloudwords\Resources\Project as Project,
+    Cloudwords\Resources\Vendor as Vendor,
+    Cloudwords\Resources\Bid as Bid,
+    Cloudwords\Resources\File as CloudwordsResourceFile;
 
 // check package dependencies
 if( !function_exists('curl_init') ) {
@@ -43,13 +57,13 @@ class Client
     /**
      * Constants
      */
-    const AUTHORIZATION_HEADER = 'Authorization: ';
-    const CONTENT_TYPE_HEADER = 'Content-Type: ';
-    const CONTENT_TYPE_JSON = 'application/json';
     const CONTENT_TYPE_MULTIPART_FORM_DATA = 'multipart/form-data';
-    const REQUEST_TYPE_GET = 'GET';
+    const AUTHORIZATION_HEADER = 'Authorization: ';
+    const CONTENT_TYPE_HEADER  = 'Content-Type: ';
+    const CONTENT_TYPE_JSON = 'application/json';
+    const REQUEST_TYPE_GET  = 'GET';
     const REQUEST_TYPE_POST = 'POST';
-    const REQUEST_TYPE_PUT = 'PUT';
+    const REQUEST_TYPE_PUT  = 'PUT';
 
     /**
      * Member variables
@@ -110,7 +124,7 @@ class Client
         curl_setopt($conn, CURLOPT_URL, $url);
         curl_setopt($conn, CURLOPT_HTTPHEADER, $this->getHeaders($bodyContentType));
         $response = $data = $this->execute($conn, $url, self::REQUEST_TYPE_GET);
-        $data = $this->get_request_data($response, $acceptContentType);
+        $data = $this->getRequestData($response, $acceptContentType);
         $this->close($conn);
         return $data;
     }
@@ -153,7 +167,7 @@ class Client
         return $headers;
     }
 
-    private function get_request_data($data, $contentType)
+    private function getRequestData($data, $contentType)
     {
         if( $contentType == self::CONTENT_TYPE_JSON ) {
             return json_decode($data, true);
@@ -219,11 +233,304 @@ class Client
     public function getOpenProjects()
     {
         $openProjects = array();
-        $projectsMetadata = $this->get($this->baseUrlWithVersion . '/project/open.json', self::CONTENT_TYPE_JSON, self::CONTENT_TYPE_JSON);
-        foreach( $projectsMetadata as $projectMetadata ) {
+        $projectsMetadata = $this->get($this->baseUrlWithVersion . '/project/open.json',
+                                       self::CONTENT_TYPE_JSON, self::CONTENT_TYPE_JSON
+                                      );
+        foreach( $projectsMetadata as $projectMetadata )
             $openProjects[] = new Project($projectMetadata);
-        }
 
         return $openProjects;
+    }
+
+    public function getClosedProjects()
+    {
+        $closedProjects = array();
+        $projectsMetadata = $this->get($this->baseUrlWithVersion . '/project/closed.json',
+                                       self::CONTENT_TYPE_JSON, self::CONTENT_TYPE_JSON
+                                      );
+        foreach( $projectsMetadata as $projectMetadata )
+            $closedProjects[] = new Project($projectMetadata);
+
+        return $closedProjects;
+    }
+
+    public function getProject($projectId)
+    {
+        $projectMetadata = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '.json',
+                                      self::CONTENT_TYPE_JSON, self::CONTENT_TYPE_JSON
+                                     );
+        return new Project($projectMetadata);
+    }
+
+    public function createProject($params)
+    {
+        $projectMetadata = $this->post($this->baseUrlWithVersion . '/project', $params,
+                                       self::CONTENT_TYPE_JSON, self::CONTENT_TYPE_JSON
+                                      );
+        return new Project($project_metadata);
+    }
+
+    public function updateProject($params)
+    {
+        $projectMetadata = $this->put($this->baseUrlWithVersion . '/project/' . $params['id'], $params,
+                                      self::CONTENT_TYPE_JSON, self::CONTENT_TYPE_JSON
+                                     );
+        return new Project($projectMetadata);
+    }
+
+    public function uploadProjectSource($projectId, $zipFile)
+    {
+        $params = array('file' => '@' . $zipFile);
+        $sourceMetadata = $this->put($this->baseUrlWithVersion . '/project/' . $projectId . '/file/source',
+                                      $params, self::CONTENT_TYPE_JSON,
+                                      self::CONTENT_TYPE_MULTIPART_FORM_DATA
+                                     );
+        return new CloudwordsResourceFile($sourceMetadata);
+    }
+
+    public function getProjectSource($projectId)
+    {
+        $sourceMetadata = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '/file/source.json',
+                                     self::CONTENT_TYPE_JSON,
+                                     self::CONTENT_TYPE_JSON);
+        return new CloudwordsResourceFile($sourceMetadata);
+    }
+
+    public function downloadSourceFile($projectId)
+    {
+        $sourceMetadata = $this->getProjectSource($projectId);
+        return $this->downloadFileFromMetadata($sourceMetadata);
+    }
+
+    public function uploadProjectReference($projectId, $zipFile)
+    {
+        $params = array('file' => '@' . $zipFile);
+        $referenceMetadata = $this->post($this->baseUrlWithVersion . '/project/' . $projectId . '/file/reference',
+                                         $params,
+                                         self::CONTENT_TYPE_JSON,
+                                         self::CONTENT_TYPE_MULTIPART_FORM_DATA
+                                        );
+        return new CloudwordsResourceFile($referenceMetadata);
+    }
+
+    public function updateProjectReference($projectId, $documentId, $zipFile)
+    {
+        $params = array('file' => '@' . $zipFile);
+        $referenceMetadata = $this->put($this->baseUrlWithVersion . '/project/' . $projectId . '/file/reference/' . $documentId,
+                                        $params,
+                                        self::CONTENT_TYPE_JSON,
+                                        self::CONTENT_TYPE_MULTIPART_FORM_DATA
+                                       );
+        return new CloudwordsResourceFile($referenceMetadata);
+    }
+
+    public function getProjectReferences($projectId)
+    {
+        $projectReferences = array();
+        $referencesMetadata = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '/file/reference.json',
+                                         self::CONTENT_TYPE_JSON,
+                                         self::CONTENT_TYPE_JSON
+                                        );
+        foreach( $referencesMetadata as $referenceMetadata )
+            $projectReferences[] = new CloudwordsResourceFile($referenceMetadata);
+
+        return $projectReferences;
+    }
+
+    public function getProjectReference($projectId, $documentId)
+    {
+        $fileMetadata = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '/file/reference/' . $documentId . '.json',
+                                   self::CONTENT_TYPE_JSON,
+                                   self::CONTENT_TYPE_JSON
+                                  );
+        return new CloudwordsResourceFile($fileMetadata);
+    }
+
+    public function downloadReferenceFile($projectId, $documentId)
+    {
+        $fileMetadata = $this->getProjectReference($projectId, $documentId);
+        return $this->downloadFileFromMetadata($fileMetadata);
+    }
+
+    public function getMasterProjectTranslatedFile($projectId)
+    {
+        $fileMetadata = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '/file/translated.json',
+                                   self::CONTENT_TYPE_JSON,
+                                   self::CONTENT_TYPE_JSON
+                                  );
+        return new CloudwordsResourceFile($fileMetadata);
+    }
+
+    public function downloadMasterTranslatedFile($projectId)
+    {
+        $fileMetadata = $this->getMasterProjectTranslatedFile($projectId);
+        return $this->downloadFileFromMetadata($fileMetadata);
+    }
+
+    public function getProjectTranslatedFiles($projectId)
+    {
+        $projectTranslatedFiles = array();
+        $filesMetadata = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '/file/translated/language.json',
+                                    self::CONTENT_TYPE_JSON,
+                                    self::CONTENT_TYPE_JSON
+                                   );
+        foreach( $filesMetadata as $fileMetadata ) 
+            $projectTranslatedFiles[] = new CloudwordsResourceFile($fileMetadata);
+
+        return $projectTranslatedFiles;
+    }
+
+    public function getProjectTranslatedFile($projectId, $language)
+    {
+        $fileMetadata = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '/file/translated/language/' . $language . '.json',
+                                   self::CONTENT_TYPE_JSON,
+                                   self::CONTENT_TYPE_JSON
+                                  );
+        return new CloudwordsResourceFile($fileMetadata);
+    }
+
+    public function downloadTranslatedFile($projectId, $language)
+    {
+        $fileMetadata = $this->getProjectTranslatedFile($projectId, $language);
+        return $this->downloadFileFromMetadata($fileMetadata);
+    }
+
+    public function approveTranslatedFile($projectId, $language)
+    {
+        $params = array('status' => 'approved');
+        $fileMetadata = $this->put($this->baseUrlWithVersion . '/project/' . $projectId . '/file/translated/language/' . $language,
+                                   $params,
+                                   self::CONTENT_TYPE_JSON,
+                                   self::CONTENT_TYPE_JSON
+                                  );
+        return new LanguageFile($fileMetadata);
+    }
+
+    public function downloadFileFromMetadata($metadata)
+    {
+        if( !is_null($metadata) && !is_null($metadata->getContentPath()) ) {
+            return $this->get($metadata->getContentPath(),
+                              self::CONTENT_TYPE_MULTIPART_FORM_DATA,
+                              self::CONTENT_TYPE_JSON
+                             );
+        }
+        return NULL;
+    }
+
+    public function requestBidsForProject($projectId, $preferredVendors, $doLetCloudwordsChoose,
+                                             $doAutoSelectBidFromVendor)
+    {
+        $params = array('preferredVendors' => $preferredVendors,
+                        'doLetCloudwordsChoose' => $doLetCloudwordsChoose,
+                        'doAutoSelectBidFromVendor' => $doAutoSelectBidFromVendor
+                       );
+        $bidRequest = $this->post($this->baseUrlWithVersion . '/project/' . $projectId . '/bid-request', $params,
+                                  self::CONTENT_TYPE_JSON,
+                                  self::CONTENT_TYPE_JSON
+                                 );
+        return new BidRequest($bidRequest);
+    }
+
+    public function getCurrentBidRequestForProject($projectId)
+    {
+        $bidRequest = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '/bid-request/current.json',
+                                 self::CONTENT_TYPE_JSON,
+                                 self::CONTENT_TYPE_JSON
+                                );
+        return new BidRequest($bidRequest);
+    }
+
+    public function getBids($projectId)
+    {
+        $bids = array();
+        $bidsMetadata = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '/bid.json',
+                                   self::CONTENT_TYPE_JSON,
+                                   self::CONTENT_TYPE_JSON
+                                  );
+        foreach( $bidsMetadata as $bidMetadata )
+            $bids[] = new Bid($bidMetadata);
+
+        return $bids;
+    }
+
+    public function getBid($projectId, $bidId)
+    {
+        $bidMetadata = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '/bid/' . $bidId . '.json',
+                                  self::CONTENT_TYPE_JSON,
+                                  self::CONTENT_TYPE_JSON
+                                 );
+        return new Bid($bidMetadata);
+    }
+
+    public function selectWinningBid($projectId, $bidId)
+    {
+        $params = array('winningBidId' => $bidId);
+        $bidRequest = $this->put($this->baseUrlWithVersion . '/project/' . $projectId . '/bid-request',
+                                 $params,
+                                 self::CONTENT_TYPE_JSON,
+                                 self::CONTENT_TYPE_JSON
+                                );
+        return new BidRequest($bidRequest);
+    }
+
+    public function getPreferredVendors()
+    {
+        $preferredVendors = array();
+        $vendors = $this->get($this->baseUrlWithVersion . '/vendor/preferred.json',
+                              self::CONTENT_TYPE_JSON,
+                              self::CONTENT_TYPE_JSON
+                             );
+        foreach( $vendors as $vendor )
+            $preferredVendors[] = new Vendor($vendor);
+
+        return $preferredVendors;
+    }
+
+    public function getSourceLanguages()
+    {
+        $sourceLanguages = array();
+        $languages = $this->get($this->baseUrlWithVersion . '/org/settings/project/language/source.json',
+                                self::CONTENT_TYPE_JSON,
+                                self::CONTENT_TYPE_JSON
+                               );
+        foreach( $languages as $language )
+            $sourceLanguages[] = new Language($language);
+
+        return $sourceLanguages;
+    }
+
+    public function getTargetLanguages()
+    {
+        $targetLanguages = array();
+        $languages = $this->get($this->baseUrlWithVersion . '/org/settings/project/language/target.json',
+                                self::CONTENT_TYPE_JSON,
+                                self::CONTENT_TYPE_JSON
+                               );
+        foreach( $languages as $language )
+            $targetLanguages[] = new Language($language);
+
+        return $targetLanguages;
+    }
+
+    public function getIntendedUses()
+    {
+        $intendedUses = array();
+        $uses = $this->get($this->baseUrlWithVersion . '/org/settings/project/intended-use.json',
+                           self::CONTENT_TYPE_JSON,
+                           self::CONTENT_TYPE_JSON
+                          );
+        foreach( $uses as $intendedUse )
+            $intendedUses[] = new IntendedUse($intendedUse);
+
+        return $intendedUses;
+    }
+
+    public function getVendor($vendorId)
+    {
+        $vendor = $this->get($this->baseUrlWithVersion . '/vendor/' . $vendorId . '.json',
+                             self::CONTENT_TYPE_JSON,
+                             self::CONTENT_TYPE_JSON
+                            );
+        return new Vendor($vendor);
     }
 }

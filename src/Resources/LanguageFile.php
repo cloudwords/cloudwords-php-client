@@ -3,15 +3,17 @@ namespace Cloudwords\Resources;
 
 require_once 'LanguageStatus.php';
 require_once 'Language.php';
+require_once 'File.php';
 
 use Cloudwords\Resources\Language as Language,
-    Cloudwords\Resources\Status as Status;
+    Cloudwords\Resources\Status as Status,
+    Cloudwords\Resources\File as CloudwordsResourceFile;
 
 /**
  * Represents the metadata around a translated file for a given project and language stored in Cloudwords.
  * 
  */
-class LanguageFile extends File
+class LanguageFile extends CloudwordsResourceFile
 {
     private $lang;
 

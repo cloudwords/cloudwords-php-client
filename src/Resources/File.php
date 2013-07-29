@@ -12,7 +12,7 @@ use Cloudwords\Resources\Language as Language;
  * @author Douglas Kim <doug@cloudwords.com>
  * @since 1.0
  */
-class CloudwordsFile
+class File
 {
     private $id;
 

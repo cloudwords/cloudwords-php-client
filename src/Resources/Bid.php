@@ -5,7 +5,7 @@ require_once 'BidStatus.php';
 require_once 'BidItem.php';
 require_once 'Vendor.php';
 
-use Cloudwords\Resources\BidItme as BidItem,
+use Cloudwords\Resources\BidItem as BidItem,
     Cloudwords\Resources\BidStatus as BidStatus,
     Cloudwords\Resources\Vendor as Vendor;
 
