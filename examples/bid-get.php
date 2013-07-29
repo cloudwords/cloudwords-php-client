@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright 2011, Cloudwords, Inc.
  *
@@ -16,15 +15,9 @@
  * limitations under the License.
  */
 
-require_once "bootstrap.php";
-
-// create an instance of the api client
-const BASE_API_URL = 'https://api-stage.cloudwords.com';
-const API_VERSION = '1';
-const AUTHENTICATION_TOKEN = 'UserToken <ENTER_AUTHORIZATION_TOKEN_HERE>';
-
-$client = new CloudwordsClient(BASE_API_URL, API_VERSION, AUTHENTICATION_TOKEN);
-
-// get bid detail from a project
-$bidItems = $client->get_bid(10193, 7787);
-print_r($bidItems);
+require_once '../src/Client.php';
+$baseApiUrl = 'https://api-stage.cloudwords.com';
+$apiVersion = 1;
+$authToken  = 'UserToken <ENTER_AUTHORIZATION_TOKEN_HERE>';
+$client = new \Cloudwords\Client($baseApiUrl, $apiVersion, $authToken);
+print_r($client->getBid(10193, 7787));
