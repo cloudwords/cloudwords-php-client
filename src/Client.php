@@ -137,7 +137,7 @@ class Client
         curl_setopt($conn, CURLOPT_POST, count($params));
         curl_setopt($conn, CURLOPT_POSTFIELDS, $bodyContentType == self::CONTENT_TYPE_JSON ? json_encode($params) : $params);
         $response = $this->execute($conn, $url, self::REQUEST_TYPE_POST);
-        $data = $this->get_request_data($response, $acceptContentType);
+        $data = $this->getRequestData($response, $acceptContentType);
         $this->close($conn);
         return $data;
     }
@@ -150,7 +150,7 @@ class Client
         curl_setopt($conn, CURLOPT_CUSTOMREQUEST, self::REQUEST_TYPE_PUT);
         curl_setopt($conn, CURLOPT_POSTFIELDS, $bodyContentType == self::CONTENT_TYPE_JSON ? json_encode($params) : $params);
         $response = $this->execute($conn, $url, self::REQUEST_TYPE_PUT);
-        $data = $this->get_request_data($response, $acceptContentType);
+        $data = $this->getRequestData($response, $acceptContentType);
         $this->close($conn);
         return $data;
     }
@@ -267,7 +267,7 @@ class Client
         $projectMetadata = $this->post($this->baseUrlWithVersion . '/project', $params,
                                        self::CONTENT_TYPE_JSON, self::CONTENT_TYPE_JSON
                                       );
-        return new Project($project_metadata);
+        return new Project($projectMetadata);
     }
 
     public function updateProject($params)

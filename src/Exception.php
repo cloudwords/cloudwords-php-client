@@ -37,7 +37,7 @@ class Exception extends \Exception
         } else if( $exceptionType == self::UNSUPPORTED_CONTENT_TYPE_EXCEPTION ) {
             $this->contentType = $params['content_type'];
         } else if( $exceptionType == self::REQUEST_EXCEPTION ) {
-            $this->errorMessage = $params['errorMessage'];
+            $this->errorMessage = $params['error_message'];
         } else if( $exceptionType == self::DEPENDENCY_EXCEPTION ) {
             $this->errorMessage = $params['errorMessage'];
         }

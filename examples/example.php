@@ -16,25 +16,24 @@
  * limitations under the License.
  */
 
-require_once "bootstrap.php";
-
-// create an instance of the api client
-const BASE_API_URL = 'https://api.cloudwords.com';
-const API_VERSION = '1';
-const AUTHENTICATION_TOKEN = 'UserToken <ENTER_AUTHORIZATION_TOKEN_HERE>';
-$client = new CloudwordsClient(BASE_API_URL, API_VERSION, AUTHENTICATION_TOKEN);
+require_once '../src/Client.php';
+$baseApiUrl = 'https://api-stage.cloudwords.com';
+$apiVersion = '1';
+//$authToken  = 'UserToken ada9c21adf246e616a1fd52c81bf830db4e7ea5358aecfe78f19165772639dff';
+$authToken  = 'UserToken <ENTER_AUTHORIZATION_TOKEN_HERE>';
+$client = new \Cloudwords\Client($baseApiUrl, $apiVersion, $authToken);
 
 // create a new project
 $params = array('name' => 'Example Project Name',
                 'description' => 'Example Project Description',
                 'notes' => 'Example Project Notes',
                 'poNumber' => '123456789',
-                'intendedUse' => '<ENTER_INTENDED_USE_ID_HERE>',
+                'intendedUse' => '1153',
                 'sourceLanguage' => 'en',
                 'targetLanguages' => array('fr', 'de'),
                 'bidDueDate' => '2050-01-01T00:00:00.000+0000',
                 'deliveryDueDate' => '2050-12-00T00:00:00.000+0000');
-$project = $client->create_project($params);
+$project = $client->createProject($params);
 
 // update an existing project
 $params = array('id' => $project->getId(),
@@ -47,23 +46,24 @@ $params = array('id' => $project->getId(),
                 'targetLanguages' => array('fr', 'de'),
                 'bidDueDate' => $project->getBidDueDate(),
                 'deliveryDueDate' => $project->getDeliveryDueDate());
-$project = $client->update_project($params);
+$project = $client->updateProject($params);
 
 // get a specific project by id
-$project = $client->get_project($project->getId());
+print_r($project->getId());
+$project = $client->getProject($project->getId());
+print_r($project);
 
 // get a list of open projects
-$projects = $client->get_open_projects();
+$projects = $client->getOpenProjects();
 
 // get a list of preferred vendors
-$preferred_vendors = $client->get_preferred_vendors();
+$preferredVendors = $client->getPreferredVendors();
 
 // get a list of source languages
-$source_languages = $client->get_source_languages();
+$sourceLanguages = $client->getSourceLanguages();
 
 // get a list of target languages
-$target_languages = $client->get_target_languages();
+$targetLanguages = $client->getTargetLanguages();
 
 // get a list of intended uses
-$intended_uses = $client->get_intended_uses();
-
+$intendedUses = $client->getIntendedUses(); 
