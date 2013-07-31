@@ -12,6 +12,7 @@ use Cloudwords\Resources\Language as Language,
     Cloudwords\Resources\IntendedUse as IntendedUse,
     Cloudwords\Resources\CodeAndDisplay as CodeAndDisplay,
     Cloudwords\Resources\User as User;
+
 /**
  * Represents a project resource in Cloudwords. A project is the central resource in Cloudwords, as it 
  * represents an initiative to translate some content. It contains information, both necessary and optional, 

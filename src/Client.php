@@ -25,6 +25,7 @@ require_once 'Resources/IntendedUse.php';
 require_once 'Resources/Project.php';
 require_once 'Resources/Vendor.php';
 require_once 'Resources/File.php';
+require_once 'Resources/Task.php';
 require_once 'Resources/Bid.php';
 use Cloudwords\Exception as ApiException,
     Cloudwords\Resources\LanguageFile as LanguageFile,
@@ -34,6 +35,7 @@ use Cloudwords\Exception as ApiException,
     Cloudwords\Resources\Project as Project,
     Cloudwords\Resources\Vendor as Vendor,
     Cloudwords\Resources\Bid as Bid,
+    Cloudwords\Resources\Task as Task,
     Cloudwords\Resources\File as CloudwordsResourceFile;
 
 // check package dependencies
@@ -532,5 +534,18 @@ class Client
                              self::CONTENT_TYPE_JSON
                             );
         return new Vendor($vendor);
+    }
+    
+    public function getProjectTasks($projectId)
+    {
+        $tasksList = array();
+        $tasksMetadata = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '/task.json',
+                                    self::CONTENT_TYPE_JSON,
+                                    self::CONTENT_TYPE_JSON
+                                   );
+        foreach( $tasksMetadata as $taskMetadata )
+            $tasksList[] = new Task($taskMetadata);
+
+        return $tasksList;
     }
 }
