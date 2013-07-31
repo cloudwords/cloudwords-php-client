@@ -29,13 +29,25 @@ class ProjectFollowers extends AbstractResource
         }
     }
 
+    /**
+     * Get projectId
+     * 
+     * @return	int     $projectId
+     */
     public function getProjectId()
     {
         return $this->projectId;
     }
 
+    /**
+     * Set projectId
+     * 
+     * @param	int     $projectId
+     * @return	$this
+     */
     public function setProjectId($projectId)
     {
         $this->projectId = $projectId;
+        return $this;
     }
 }

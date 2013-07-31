@@ -36,6 +36,7 @@ class Assignee extends AbstractResource
      * - customerUser: array The customerUser associated with this assignee
      *
      * @param array $params The parameters used to initialize a bid instance
+     * @void
      */
     public function __construct($params)
     {
@@ -43,56 +44,103 @@ class Assignee extends AbstractResource
             $this->vendor = new Vendor($params['vendor']);
         }
         
-    	if( isset($params['projectFollowers']) ) {
+        if( isset($params['projectFollowers']) ) {
             $this->projectFollowers = new ProjectFollowers($params['projectFollowers']);
         }
         
-    	if( isset($params['customer']) ) {
+        if( isset($params['customer']) ) {
             $this->customer = new Customer($params['customer']);
         }
         
-    	if( isset($params['customerUser']) ) {
+        if( isset($params['customerUser']) ) {
             $this->customerUser = new User($params['customerUser']);
         }
     }
-	
+    
+    /**
+     * Get Vendor
+     *
+     * @return  \Cloudwords\Resource\Vendor
+     */
     public function getVendor()
     {
-		return $this->vendor;
-	}
+        return $this->vendor;
+    }
 
-	public function setVendor(Vendor $vendor)
-	{
-		$this->vendor = $vendor;
-	}
+    /**
+     * Set Vendor
+     * 
+     * @param   Vendor  $vendor
+     * @return  $this 
+     */
+    public function setVendor(Vendor $vendor)
+    {
+        $this->vendor = $vendor;
+        return $this;
+    }
 
-	public function getProjectFollowers()
-	{
-		return $this->projectFollowers;
-	}
+    /**
+     * Get ProjectFollowers
+     * 
+     * @return  \Cloudwords\Resource\ProjectFollowers
+     */
+    public function getProjectFollowers()
+    {
+        return $this->projectFollowers;
+    }
 
-	public function setProjectFollowers(ProjectFollowers $projectFollowers)
-	{
-		$this->projectFollowers = $projectFollowers;
-	}
+    /**
+     * Set ProjectFollowers
+     * 
+     * @param   \Cloudwords\Resource\ProjectFollowers   $projectFollowers
+     * @return  $this
+     */
+    public function setProjectFollowers(ProjectFollowers $projectFollowers)
+    {
+        $this->projectFollowers = $projectFollowers;
+    }
 
-	public function getCustomer()
-	{
-		return $this->customer;
-	}
+    /**
+     * Get Customer
+     * 
+     * @return  \Cloudwords\Resource\Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
 
-	public function setCustomer(Customer $customer)
-	{
-		$this->customer = $customer;
-	}
+    /**
+     * Set Customer
+     * 
+     * @param   \Cloudwords\Resource\ProjectFollowers   $projectFollowers
+     * @return  $this
+     */
+    public function setCustomer(Customer $customer)
+    {
+        $this->customer = $customer;
+        return $this;
+    }
 
-	public function getCustomerUser()
-	{
-		return $this->customerUser;
-	}
+    /**
+     * Get CustomerUser
+     * 
+     * @return  \Cloudwords\Resource\User
+     */
+    public function getCustomerUser()
+    {
+        return $this->customerUser;
+    }
 
-	public function setCustomerUser(User $customerUser)
-	{
-		$this->customerUser = $customerUser;
-	}
+    /**
+     * Set CustomerUser
+     * 
+     * @param   User    $customerUser
+     * @return  $this
+     */
+    public function setCustomerUser(User $customerUser)
+    {
+        $this->customerUser = $customerUser;
+        return $this;
+    }
 }

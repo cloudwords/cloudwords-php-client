@@ -12,7 +12,7 @@ use Cloudwords\Resources\Project as Project,
     Cloudwords\Resources\CodeAndDisplay as CodeAndDisplay;
 
 /**
- * Represents project task for the specified project.
+ * Represents task object
  * 
  * @author Dolly Aswin <dolly.aswin@gmail.com>
  * @since 1.0
@@ -28,8 +28,8 @@ class Task
     private $startDate;
     
     private $status;
-	
-	private $assignee;
+    
+    private $assignee;
 
     private $closedDate;
 
@@ -75,165 +75,318 @@ class Task
         if( isset($params['project']) ) {
             $this->project = new Project($params['project']);
         }
-    	if( isset($params['startDate']) ) {
+        if( isset($params['startDate']) ) {
             $this->startDate = new \DateTime($params['startDate']);
         }
-    	if( isset($params['assignee']) ) {
+        if( isset($params['assignee']) ) {
             $this->assignee = new Assignee($params['assignee']);
         }
         if( isset($params['status']) ) {
             $this->status = new CodeAndDisplay($params['status']);
         }
-    	if( isset($params['closedDate']) ) {
+        if( isset($params['closedDate']) ) {
             $this->closedDate = new \DateTime($params['closedDate']);
         }
-    	if( isset($params['createdDate']) ) {
+        if( isset($params['createdDate']) ) {
             $this->createdDate = new \DateTime($params['createdDate']);
         }
         if( isset($params['description']) ) {
             $this->description = $params['description'];
         }
-    	if( isset($params['dueDate']) ) {
+        if( isset($params['dueDate']) ) {
             $this->dueDate = new \DateTime($params['dueDate']);
         }
-    	if( isset($params['emailReminderDay']) ) {
+        if( isset($params['emailReminderDay']) ) {
             $this->emailReminderDay = new \DateTime($params['emailReminderDay']);
         }
-    	if( isset($params['targetLanguage']) ) {
+        if( isset($params['targetLanguage']) ) {
             $this->targetLanguage = $params['targetLanguage'];
         }
-    	if( isset($params['type']) ) {
+        if( isset($params['type']) ) {
             $this->type = new CodeAndDisplay($params['type']);
         }
     }
 
+    /**
+     * Get id
+     * 
+     * @return  int $id
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Set Id
+     *
+     * @param   int     $id
+     * @return  $this
+     */
     public function setId($id)
     {
         $this->id = $id;
         return $this;
     }
-	public function getName()
-	{
-		return $this->name;
-	}
+    
+    /**
+     * Get name
+     * 
+     * @return  string  $name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
-	public function setName($name)
-	{
-		$this->name = $name;
-	}
+    /**
+     * Set name
+     *
+     * @param   string  name
+     * @return  $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 
-	public function getProject()
-	{
-		return $this->project;
-	}
+    /**
+     * Get Project
+     * 
+     * @return  \Cloudwords\Resources\Project
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
 
-	public function setProject($project)
-	{
-		$this->project = $project;
-	}
+    /**
+     * Set Project
+     * 
+     * @param   Project $project
+     * @return  $this
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
+        return $this;
+    }
 
-	public function getStartDate()
-	{
-		return $this->startDate;
-	}
+    /**
+     * Get startDate
+     * 
+     * @return  \DateTime
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
 
-	public function setStartDate($startDate)
-	{
-		$this->startDate = $startDate;
-	}
+    /**
+     * Set start date
+     * 
+     * @param   \DateTime   $startDate
+     * @return  $this
+     */
+    public function setStartDate(\DateTime $startDate)
+    {
+        $this->startDate = $startDate;
+        return $this;
+    }
 
-	public function getStatus()
-	{
-		return $this->status;
-	}
+    /**
+     * Get status
+     * 
+     * @return  CodeAndDisplay
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
 
-	public function setStatus($status)
-	{
-		$this->status = $status;
-	}
+    /**
+     * Set status
+     * 
+     * @param   \Cloudwords\Resources\CodeAndDisplay $status
+     * @return  $this
+     */
+    public function setStatus(CodeAndDisplay $status)
+    {
+        $this->status = $status;
+        return $this;
+    }
 
-	public function getAssignee()
-	{
-		return $this->assignee;
-	}
+    /**
+     * Get Assignee
+     * 
+     * @return  \Cloudwords\Resources\Assignee
+     */
+    public function getAssignee()
+    {
+        return $this->assignee;
+    }
 
-	public function setAssignee($assignee)
-	{
-		$this->assignee = $assignee;
-	}
+    /**
+     * Set Assignee
+     * 
+     * @param   \Cloudwords\Resources\Assignee $assignee
+     * @return  $this
+     */
+    public function setAssignee($assignee)
+    {
+        $this->assignee = $assignee;
+    }
 
-	public function getClosedDate()
-	{
-		return $this->closedDate;
-	}
+    /**
+     * Get closedDate
+     * 
+     * @return  \DateTime    closedDate
+     */
+    public function getClosedDate()
+    {
+        return $this->closedDate;
+    }
 
-	public function setClosedDate($closedDate)
-	{
-		$this->closedDate = $closedDate;
-	}
+    /**
+     * Set closedDate
+     * 
+     * @param   \DateTime   $closedDate
+     * @return  $this
+     */
+    public function setClosedDate($closedDate)
+    {
+        $this->closedDate = $closedDate;
+    }
 
-	public function getCreatedDate()
-	{
-		return $this->createdDate;
-	}
+    /**
+     * Get createdDate
+     * 
+     * @return  \DateTime   $createdDate
+     */
+    public function getCreatedDate()
+    {
+        return $this->createdDate;
+    }
 
-	public function setCreatedDate($createdDate)
-	{
-		$this->createdDate = $createdDate;
-	}
+    /**
+     * Set createdDate
+     * 
+     * @param   \DateTime   $createdDate
+     * @return  $this
+     */
+    public function setCreatedDate($createdDate)
+    {
+        $this->createdDate = $createdDate;
+        return $this;
+    }
 
-	public function getDescription()
-	{
-		return $this->description;
-	}
+    /**
+     * Get description
+     * 
+     * @return  string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
-	public function setDescription($description)
-	{
-		$this->description = $description;
-	}
+    /**
+     * Set description
+     * 
+     * @param   string    description
+     * @return  $this
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return     $this;
+    }
 
-	public function getDueDate()
-	{
-		return $this->dueDate;
-	}
+    /**
+     * Get dueDate
+     * 
+     * @return  \DateTime    $dueDate
+     */
+    public function getDueDate()
+    {
+        return $this->dueDate;
+    }
 
-	public function setDueDate($dueDate)
-	{
-		$this->dueDate = $dueDate;
-	}
+    /**
+     * Set dueDate
+     * 
+     * @param   \DateTime   $dueDate
+     * @return  $this
+     */
+    public function setDueDate($dueDate)
+    {
+        $this->dueDate = $dueDate;
+        return $this;
+    }
 
-	public function getEmailReminderDay()
-	{
-		return $this->emailReminderDay;
-	}
+    /**
+     * Get emailReminderDay
+     * 
+     * @return  \DateTime $emailReminderDay
+     */
+    public function getEmailReminderDay()
+    {
+        return $this->emailReminderDay;
+    }
 
-	public function setEmailReminderDay($emailReminderDay)
-	{
-		$this->emailReminderDay = $emailReminderDay;
-	}
+    /**
+     * Set emailReminderDay
+     * 
+     * @param   \DateTime   $emailReminderDay
+     * @return  $this
+     */
+    public function setEmailReminderDay($emailReminderDay)
+    {
+        $this->emailReminderDay = $emailReminderDay;
+        return $this;
+    }
 
-	public function getTargetLanguage()
-	{
-		return $this->targetLanguage;
-	}
+    /**
+     * Get targetLanguage
+     * 
+     * @return  \Cloudwords\Resources\Language
+     */
+    public function getTargetLanguage()
+    {
+        return $this->targetLanguage;
+    }
 
-	public function setTargetLanguage($targetLanguage)
-	{
-		$this->targetLanguage = $targetLanguage;
-	}
+    /**
+     * Set targetLanguage
+     * 
+     * @param   \Cloudwords\Resources\Language    $targetLanguage
+     * @return  $this
+     */
+    public function setTargetLanguage(Language $targetLanguage)
+    {
+        $this->targetLanguage = $targetLanguage;
+        return $this;
+    }
 
-	public function getType()
-	{
-		return $this->type;
-	}
+    /**
+     * Get type
+     * 
+     * @return  \Cloudwords\Resources\CodeAndDisplay
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 
-	public function setType($type)
-	{
-		$this->type = $type;
-	}
+    /**
+     * Set type \Cloudwords\Resources\CodeAndDisplay
+     *
+     * @param   \Cloudwords\Resources\CodeAndDisplay    $type
+     * @return  $this
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
 }

@@ -25,13 +25,25 @@ abstract class AbstractResource
         }
     }
 
+    /**
+     * Get path
+     * 
+     * @return  string  $path
+     */
     public function getPath()
     {
         return $this->path;
     }
 
+    /**
+     * Set path
+     * 
+     * @param   string  $path
+     * @return  $this
+     */
     public function setPath($path)
     {
         $this->path = $path;
+        return $this;
     }
 }

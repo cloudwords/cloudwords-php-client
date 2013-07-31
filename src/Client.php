@@ -536,10 +536,88 @@ class Client
         return new Vendor($vendor);
     }
     
+    /**
+     * Get the list of all tasks for the specified project. 
+     * 
+     * @param   int     projectId
+     * @return  array
+     */
     public function getProjectTasks($projectId)
     {
         $tasksList = array();
         $tasksMetadata = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '/task.json',
+                                    self::CONTENT_TYPE_JSON,
+                                    self::CONTENT_TYPE_JSON
+                                   );
+        foreach( $tasksMetadata as $taskMetadata )
+            $tasksList[] = new Task($taskMetadata);
+
+        return $tasksList;
+    }
+    
+    /**
+     * Get the list of all tasks for the specified project with a given status
+     * 
+     * @param   int     projectId
+     * @param   string  status code
+     * @return  array
+     */
+    public function getProjectTasksByStatus($projectId, $status)
+    {
+        $tasksList = array();
+        $tasksMetadata = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '/task/'
+                                  . 'status/' . $status . '.json',
+                                    self::CONTENT_TYPE_JSON,
+                                    self::CONTENT_TYPE_JSON
+                                   );
+        foreach( $tasksMetadata as $taskMetadata )
+            $tasksList[] = new Task($taskMetadata);
+
+        return $tasksList;
+    }
+
+    /**
+     * Get a specified task for the specified project.
+     * 
+     * @param   int projectId
+     * @param   int taskId
+     * @return  Cloudwords\Resources\Task
+     */
+    public function getProjectTask($projectId, $taskId)
+    {
+        $taskList = array();
+        $taskMetadata = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '/task/'
+                                 . $taskId . '.json',
+                                   self::CONTENT_TYPE_JSON,
+                                   self::CONTENT_TYPE_JSON
+                                  );
+        $task = new Task($taskMetadata);
+        return $task;
+    }
+    
+    /**
+     * Get the list of all tasks across all projects
+     */
+    public function getAllProjectTasks()
+    {
+        $tasksList = array();
+        $tasksMetadata = $this->get($this->baseUrlWithVersion . '/task.json',
+                                    self::CONTENT_TYPE_JSON,
+                                    self::CONTENT_TYPE_JSON
+                                   );
+        foreach( $tasksMetadata as $taskMetadata )
+            $tasksList[] = new Task($taskMetadata);
+
+        return $tasksList;
+    }
+    
+   /**
+    * Get the list of all tasks across all projects with the specified status. 
+    */
+    public function getAllProjectTasksByStatus($status)
+    {
+        $tasksList = array();
+        $tasksMetadata = $this->get($this->baseUrlWithVersion . '/task/status/' . $status . '.json',
                                     self::CONTENT_TYPE_JSON,
                                     self::CONTENT_TYPE_JSON
                                    );

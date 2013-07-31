@@ -20,6 +20,7 @@ class Customer
      * - name: string The customer name
      *
      * @param array $params The parameters used to initialize a project status instance
+     * @void
      */
     public function __construct($params)
     {
@@ -32,21 +33,44 @@ class Customer
         }
     }
 
+    /**
+     * Get id
+     * 
+     * @return  int   id
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Set Id
+     * 
+     * @param   int     id
+     * @return  $this
+     */
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
+    /**
+     * Get name
+     * 
+     * @return  string  name
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * Set name
+     *
+     * @param   string  name
+     * @return  $this
+     */
     public function setName($name)
     {
         $this->name = $name;
