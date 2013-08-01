@@ -627,9 +627,25 @@ class Client
         return $tasksList;
     }
     
+    /**
+     * Create new task for sepecified project
+     */
     public function createProjectTask($projectId, $params)
     {
         $taskMetadata = $this->post($this->baseUrlWithVersion . '/project/' . $projectId . '/task',
+                                    $params,
+                                    self::CONTENT_TYPE_JSON,
+                                    self::CONTENT_TYPE_JSON
+                                   );
+        return new Task($taskMetadata);
+    }
+
+    /**
+     * Update task for sepecified project 
+     */
+    public function updateProjectTask($projectId, $taskId, $params)
+    {
+        $taskMetadata = $this->put($this->baseUrlWithVersion . '/project/' . $projectId . '/task/' . $taskId,
                                     $params,
                                     self::CONTENT_TYPE_JSON,
                                     self::CONTENT_TYPE_JSON
