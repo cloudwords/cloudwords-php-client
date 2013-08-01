@@ -3,10 +3,12 @@ namespace Cloudwords\Resources;
 
 require_once 'Assignee.php';
 require_once 'Project.php';
+require_once 'TaskFollower.php';
 require_once 'CodeAndDisplay.php';
 require_once 'Language.php';
 
 use Cloudwords\Resources\Project as Project, 
+    Cloudwords\Resources\TaskFollower as TaskFollower,
     Cloudwords\Resources\Assignee as Assignee,
     Cloudwords\Resources\Language as Language,
     Cloudwords\Resources\CodeAndDisplay as CodeAndDisplay;
@@ -28,6 +30,8 @@ class Task
     private $startDate;
     
     private $status;
+    
+    private $followers;
     
     private $assignee;
 
@@ -54,6 +58,7 @@ class Task
      * - startDate: string of start date
      * - status: array The task status
      * - assignee: array The assignee associated with this task
+     * - followers: array The followers associated with this task
      * - closedDate: string of start date
      * - createdDate: string of created date
      * - description: string The description provided by the vendor for this bid
@@ -81,6 +86,13 @@ class Task
         if( isset($params['assignee']) ) {
             $this->assignee = new Assignee($params['assignee']);
         }
+        if( isset($params['followers']) ) {
+            $taskFollowers = array();
+            foreach ($params['followers'] as $follower)
+                $taskFollowers[] = new TaskFollower($follower);
+
+            $this->followers = $taskFollowers;
+        }
         if( isset($params['status']) ) {
             $this->status = new CodeAndDisplay($params['status']);
         }
@@ -97,7 +109,8 @@ class Task
             $this->dueDate = new \DateTime($params['dueDate']);
         }
         if( isset($params['emailReminderDay']) ) {
-            $this->emailReminderDay = new \DateTime($params['emailReminderDay']);
+//            $this->emailReminderDay = new \DateTime($params['emailReminderDay']);
+            $this->emailReminderDay = $params['emailReminderDay'];
         }
         if( isset($params['targetLanguage']) ) {
             $this->targetLanguage = $params['targetLanguage'];
@@ -238,6 +251,27 @@ class Task
     }
 
     /**
+     * Get Followers
+     * 
+     * @return  array
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
+    }
+
+    /**
+     * Set Followers
+     * 
+     * @param   array	$followers
+     * @return  $this
+     */
+    public function setFollowers(array $followers)
+    {
+        $this->followers = $followers;
+    }
+
+    /**
      * Get closedDate
      * 
      * @return  \DateTime    closedDate
@@ -337,7 +371,7 @@ class Task
     /**
      * Set emailReminderDay
      * 
-     * @param   \DateTime   $emailReminderDay
+     * @param   int		$emailReminderDay
      * @return  $this
      */
     public function setEmailReminderDay($emailReminderDay)
