@@ -361,7 +361,7 @@ class Task
     /**
      * Get emailReminderDay
      * 
-     * @return  \DateTime $emailReminderDay
+     * @return	int	$emailReminderDay
      */
     public function getEmailReminderDay()
     {
