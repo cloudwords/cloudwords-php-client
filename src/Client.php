@@ -652,4 +652,28 @@ class Client
                                    );
         return new Task($taskMetadata);
     }
+    
+    /**
+     * Upload an attachment for the task.
+     */
+    public function uploadTaskAttachment($projectId, $taskId, $fileUpload)
+    {
+        $url = $this->baseUrlWithVersion . '/project/' . $projectId . '/task/' . $taskId . '/file/attachment/content';
+        $param = array('file' => '@' . $fileUpload);
+        $fileMetadata = $this->put($url, $param, self::CONTENT_TYPE_JSON, self::CONTENT_TYPE_MULTIPART_FORM_DATA);
+        return new CloudwordsResourceFile($fileMetadata);
+    }
+    
+    /**
+     * Get the attachment for the specified task.
+     */
+    public function getTaskAttachment($projectId, $taskId)
+    {
+        $fileMetadata = $this->get($this->baseUrlWithVersion . '/project/' . $projectId . '/task/'
+                                 . $taskId . '/file/attachment.json',
+                                   self::CONTENT_TYPE_JSON,
+                                   self::CONTENT_TYPE_JSON
+                                  );
+        return new CloudwordsResourceFile($fileMetadata);
+    }
 }

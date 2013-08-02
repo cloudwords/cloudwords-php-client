@@ -65,95 +65,163 @@ class File
             $this->fileContents = $params['fileContents'];
         }
         if( isset($params['createdDate']) ) {
-            $this->createdDate = $params['createdDate'];
+            $this->createdDate = new \DateTime($params['createdDate']);
         }
         if( isset($params['path']) ) {
             $this->path = $params['path'];
         }
     }
 
+    /**
+     * Get id
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Set id
+     * 
+     * @param	int		id
+     * @return	$this
+     */
     public function setId($id)
     {
         $this->id = $id;
         return $this;
     }
 
+    /**
+     * Get filename
+     */
     public function getFilename()
     {
         return $this->filename;
     }
 
+    /**
+     * Set filename
+     * 
+     * @param	string	filename
+     * @return	$this
+     */
     public function setFilename($filename)
     {
         $this->filename = $filename;
         return $this;
     }
 
+    /**
+     * Get lang
+     */    
     public function getLang()
     {
         return $this->lang;
     }
 
-    public function setLang($lang)
+    /**
+     * Set language
+     * 
+     * @param	\Cloudwords\Resources\Language	$lang
+     * @return	$this
+     */
+    public function setLang(Language $lang)
     {
         $this->lang = $lang;
         return $this;
     }
 
+    /**
+     * Get content path
+     */
     public function getContentPath()
     {
         return $this->contentPath;
     }
 
+    /**
+     * Set contentPath
+     * 
+     * @param	string	$contentPath
+     */
     public function setContentPath($contentPath)
     {
         $this->contentPath = $contentPath;
         return $this;
     }
 
+    /**
+     * Get size in kilobytes
+     */
     public function getSizeInKilobytes()
     {
         return $this->sizeInKilobytes;
     }
 
+    /**
+     * Set sizeInKilobytes
+     * 
+     * @param	int	$sizeInKilobytes
+     */
     public function setSizeInKilobytes($sizeInKilobytes)
     {
         $this->sizeInKilobytes = $sizeInKilobytes;
         return $this;
     }
 
+    /**
+     * Get fileContents
+     */
     public function getFileContents()
     {
         return $this->fileContents;
     }
 
+    /**
+     * Set fileContents
+     * 
+     * @param	string	$fileContents
+     * @return	$this
+     */
     public function setFileContents($fileContents)
     {
         $this->fileContents = $fileContents;
         return $this;
     }
 
+    /**
+     * Get createdDate
+     */
     public function getCreatedDate()
     {
         return $this->createdDate;
     }
 
-    public function setCreatedDate($createdDate)
+    /**
+     * Set created date
+     * 
+     * @param	\DateTime	$createdDate
+     */
+    public function setCreatedDate(\DateTime $createdDate)
     {
         $this->createdDate = $createdDate;
         return $this;
     }
 
+    /**
+     * Get path
+     */
     public function getPath()
     {
         return $this->path;
     }
 
+    /**
+     * Set path
+     * @param 	string $path
+     * @return	$this
+     */
     public function setPath($path)
     {
         $this->path = $path;

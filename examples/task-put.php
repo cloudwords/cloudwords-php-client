@@ -17,5 +17,14 @@ $params = array('name' => 'Testing Project Task - REVISED',
                  'emailReminderDay' => 10
                 );
 $projectId = 10173;
-$taskId = 29537;
-print_r($client->updateProjectTask($projectId, $taskId, $params));
+//$taskId = 29537;
+//$taskId = 29097;
+//$taskId = 29583;
+//$taskId = 29585;
+//$taskId = '29587';
+$taskId = 29589;
+$fileUpload = 'files/PHP.zip';
+
+//print_r($client->updateProjectTask($projectId, $taskId, $params));
+
+print_r($client->uploadTaskAttachment($projectId, $taskId, $fileUpload));
