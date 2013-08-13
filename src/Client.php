@@ -811,6 +811,34 @@ class Client
     }
     
     /**
+     * Lists all active users filtered by Department Id
+     */
+    public function getActiveUserByDepartmentId($departmentId)
+    {
+        $userList = array();
+        $usersMetadata = $this->filterByDepartment($departmentId, 'user.json');
+        foreach ($usersMetadata as $userMetadata) {
+            $userList[] = new User($userMetadata); 
+        }
+
+        return $userList;
+    }
+    
+    /**
+     * Lists the users who are available to follow projects filtered by departmentId
+     */
+    public function getAvailableFollowersByDepartmentId($departmentId)
+    {
+        $followerList  = array();
+        $usersMetadata = $this->filterByDepartment($departmentId, 'follower/available.json');
+        foreach ($usersMetadata as $userMetadata) {
+            $followerList[] = new User($userMetadata); 
+        }
+
+        return $followerList;
+    }
+    
+    /**
      * Retrieve resource filter by Department Id 
      */
     protected function filterByDepartment($departmentId, $callingPath)
