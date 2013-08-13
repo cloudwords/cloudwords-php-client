@@ -721,4 +721,21 @@ class Client
         $user = new User($userMetadata);
         return $user;
     }
+    
+    /**
+     * Lists all active users
+     */
+    public function getActiveUser()
+    {
+        $userList = array();
+        $usersMetadata = $this->get($this->baseUrlWithVersion . '/user.json',
+                                    self::CONTENT_TYPE_JSON,
+                                    self::CONTENT_TYPE_JSON
+                                   );
+        foreach ($usersMetadata as $userMetadata) {
+            $userList[] = new User($userMetadata); 
+        }
+
+        return $userList;
+    }
 }
