@@ -21,3 +21,8 @@ $client = new \Cloudwords\Client($baseApiUrl, $apiVersion, $authToken);
 //print_r($client->getAllProjectTasksByStatus('closed'));
 //print_r($client->getAllProjectTasksByStatus('rejected'));
 //print_r($client->getAllProjectTasksByStatus('cancelled'));
+//print_r($client->getAllProjectTasksByDepartmentId(327));
+//print_r($client->getAllProjectTasksWithStatusByDepartmentId(327, 'open'));
+//print_r($client->getAllProjectTasksWithStatusByDepartmentId(327, 'closed'));
+//print_r($client->getAllProjectTasksWithStatusByDepartmentId(327, 'rejected'));
+//print_r($client->getAllProjectTasksWithStatusByDepartmentId(327, 'cancelled'));

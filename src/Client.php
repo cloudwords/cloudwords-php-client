@@ -785,7 +785,33 @@ class Client
     }
     
     /**
-     * Retrieve resource filter by departmentId 
+     * Get All Project tasks filtered by Department Id 
+     */
+    public function getAllProjectTasksByDepartmentId($departmentId)
+    {
+        $tasksList = array();
+        $tasksMetadata = $this->filterByDepartment($departmentId, 'task.json');
+        foreach( $tasksMetadata as $taskMetadata )
+            $tasksList[] = new Task($taskMetadata);
+
+        return $tasksList;
+    }
+
+    /**
+     * Get All Project tasks with status filtered by Department Id 
+     */
+    public function getAllProjectTasksWithStatusByDepartmentId($departmentId, $status)
+    {
+        $tasksList = array();
+        $tasksMetadata = $this->filterByDepartment($departmentId, 'task/status/' . $status . '.json');
+        foreach( $tasksMetadata as $taskMetadata )
+            $tasksList[] = new Task($taskMetadata);
+
+        return $tasksList;
+    }
+    
+    /**
+     * Retrieve resource filter by Department Id 
      */
     protected function filterByDepartment($departmentId, $callingPath)
     {
