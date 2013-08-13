@@ -30,6 +30,7 @@ require_once 'Resources/File.php';
 require_once 'Resources/Task.php';
 require_once 'Resources/Bid.php';
 require_once 'Resources/Department.php';
+require_once 'Resources/User.php';
 use Cloudwords\Exception as ApiException,
     Cloudwords\Resources\LanguageFile as LanguageFile,
     Cloudwords\Resources\Language as Language,
@@ -39,6 +40,7 @@ use Cloudwords\Exception as ApiException,
     Cloudwords\Resources\Vendor as Vendor,
     Cloudwords\Resources\Bid as Bid,
     Cloudwords\Resources\Task as Task,
+    Cloudwords\Resources\User as User,
     Cloudwords\Resources\File as CloudwordsResourceFile;
 
 // check package dependencies
@@ -705,5 +707,18 @@ class Client
                                        self::CONTENT_TYPE_JSON, self::CONTENT_TYPE_JSON
                                       );
         return new Department($departmentMetadata);
+    }
+
+    /**
+     * Gets the user resource for the user matching the API token in use
+     */
+    public function getCurrentUser()
+    {
+        $userMetadata = $this->get($this->baseUrlWithVersion . '/user/current.json',
+                                   self::CONTENT_TYPE_JSON,
+                                   self::CONTENT_TYPE_JSON
+                                  );
+        $user = new User($userMetadata);
+        return $user;
     }
 }
