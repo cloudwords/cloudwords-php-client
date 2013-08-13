@@ -738,4 +738,21 @@ class Client
 
         return $userList;
     }
+    
+    /**
+     * Lists the users who are available to follow projects.
+     */
+    public function getAvailableFollowers()
+    {
+        $followerList = array();
+        $usersMetadata = $this->get($this->baseUrlWithVersion . '/follower/available.json',
+                                    self::CONTENT_TYPE_JSON,
+                                    self::CONTENT_TYPE_JSON
+                                   );
+        foreach ($usersMetadata as $userMetadata) {
+            $followerList[] = new User($userMetadata); 
+        }
+
+        return $followerList;
+    }
 }
