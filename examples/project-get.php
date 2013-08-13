@@ -5,3 +5,5 @@ $apiVersion = '1';
 $authToken  = 'UserToken <ENTER_AUTHORIZATION_TOKEN_HERE>';
 $client = new \Cloudwords\Client($baseApiUrl, $apiVersion, $authToken);
 print_r($client->getProject(10173));
+print_r($client->getOpenProjectsByDepartmentId(327));
+print_r($client->getClosedProjectsByDepartmentId(327));

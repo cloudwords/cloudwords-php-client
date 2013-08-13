@@ -755,4 +755,44 @@ class Client
 
         return $followerList;
     }
+    
+    /**
+     * Get Open Project filtered by Department Id
+     */
+    public function getOpenProjectsByDepartmentId($departmentId)
+    {
+        $projectList = array();
+        $projectsMetadata = $this->filterByDepartment($departmentId, 'project/open.json');
+        foreach ($projectsMetadata as $projectMetadata) {
+            $projectList[] = new Project($projectMetadata);
+        }
+        
+        return $projectList;
+    }
+
+	/**
+     * Get Closed Project filtered by Department Id
+     */
+    public function getClosedProjectsByDepartmentId($departmentId)
+    {
+        $projectList = array();
+        $projectsMetadata = $this->filterByDepartment($departmentId, 'project/closed.json');
+        foreach ($projectsMetadata as $projectMetadata) {
+            $projectList[] = new Project($projectMetadata);
+        }
+        
+        return $projectList;
+    }
+    
+    /**
+     * Retrieve resource filter by departmentId 
+     */
+    protected function filterByDepartment($departmentId, $callingPath)
+    {
+        $metadata = $this->get($this->baseUrlWithVersion . '/department/' . $departmentId . '/' . $callingPath,
+                               self::CONTENT_TYPE_JSON,
+                               self::CONTENT_TYPE_JSON
+                              );
+        return $metadata;
+    }
 }
