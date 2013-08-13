@@ -17,6 +17,8 @@
 
 namespace Cloudwords;
 
+use Cloudwords\Resources\Department;
+
 require_once 'Exception.php';
 require_once 'Resources/LanguageFile.php';
 require_once 'Resources/Language.php';
@@ -27,6 +29,7 @@ require_once 'Resources/Vendor.php';
 require_once 'Resources/File.php';
 require_once 'Resources/Task.php';
 require_once 'Resources/Bid.php';
+require_once 'Resources/Department.php';
 use Cloudwords\Exception as ApiException,
     Cloudwords\Resources\LanguageFile as LanguageFile,
     Cloudwords\Resources\Language as Language,
@@ -675,5 +678,32 @@ class Client
                                    self::CONTENT_TYPE_JSON
                                   );
         return new CloudwordsResourceFile($fileMetadata);
+    }
+    
+    /**
+     * Get list of department
+     */
+    public function getDepartment()
+    {
+        $departmentList = array();
+        $departmentsMetadata = $this->get($this->baseUrlWithVersion . '/department.json',
+                                          self::CONTENT_TYPE_JSON,
+                                          self::CONTENT_TYPE_JSON
+                                         );
+        foreach( $departmentsMetadata as $departmentMetadata )
+            $departmentList[] = new Department($departmentMetadata);
+
+        return $departmentList;
+    }
+    
+    /**
+     * Create new department
+     */
+    public function createDepartment($params)
+    {
+        $departmentMetadata = $this->post($this->baseUrlWithVersion . '/department', $params,
+                                       self::CONTENT_TYPE_JSON, self::CONTENT_TYPE_JSON
+                                      );
+        return new Department($departmentMetadata);
     }
 }
