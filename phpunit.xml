@@ -1,0 +1,8 @@
+<phpunit bootstrap="./tests/bootstrap.php">
+  <testsuite name="Cloudwords API Client Test Suite">
+    <directory>test/</directory>
+  </testsuite>
+  <logging>
+    <log type="junit" target="build/logs/junit.xml"/>
+  </logging>    
+</phpunit>

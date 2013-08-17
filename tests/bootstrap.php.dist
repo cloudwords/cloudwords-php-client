@@ -1,0 +1,26 @@
+<?php
+/**
+ * Copyright 2011, Cloudwords, Inc.
+ *
+ * Licensed under the API LICENSE AGREEMENT, Version 1.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.cloudwords.com/developers/license-1.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// Define path to application directory
+defined('TESTS_PATH') || define('TESTS_PATH', realpath(dirname(__FILE__)));
+defined('TESTS_BASE_API_URL') || define('TESTS_BASE_API_URL', 'https://api-stage.cloudwords.com');
+defined('TESTS_API_VERSION') || define('TESTS_API_VERSION', '1');
+defined('TESTS_AUTH_TOKEN') || define('TESTS_AUTH_TOKEN', 'UserToken <ENTER_AUTHORIZATION_TOKEN_HERE>');
+defined('TESTS_PROJECT_ID') || define('TESTS_PROJECT_ID', '<ENTER_PROJECT_ID_HERE>');
+
+require_once 'PHPUnit/Framework/TestCase.php';
+require_once TESTS_PATH . '/../src/Client.php';

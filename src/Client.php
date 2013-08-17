@@ -17,8 +17,6 @@
 
 namespace Cloudwords;
 
-use Cloudwords\Resources\Department;
-
 require_once 'Exception.php';
 require_once 'Resources/LanguageFile.php';
 require_once 'Resources/Language.php';
@@ -36,6 +34,7 @@ use Cloudwords\Exception as ApiException,
     Cloudwords\Resources\Language as Language,
     Cloudwords\Resources\BidRequest as BidRequest,
     Cloudwords\Resources\IntendedUse as IntendedUse,
+    Cloudwords\Resources\Department as Department,
     Cloudwords\Resources\Project as Project,
     Cloudwords\Resources\Vendor as Vendor,
     Cloudwords\Resources\Bid as Bid,
