@@ -3,9 +3,25 @@ namespace Cloudwords\Tests;
 
 class ProjectTaskTest extends \PHPUnit_Framework_TestCase
 {
+    protected $client;
+    
+    protected $params;
+    
     public function setUp()
     {
         $this->client = new \Cloudwords\Client(TESTS_BASE_API_URL, TESTS_API_VERSION, TESTS_AUTH_TOKEN);
+        $this->params = array('name' => 'Project Task Test Case',
+                              'description' => 'This is just for unit testing Project Task PHP Client',
+                              'type' => 'custom',
+                              'assignee'  => array('customerUser' => array('id' => TESTS_CUSTOMERUSER_ID)),
+                              'followers' => array(array('customerUser' => array('id' => TESTS_CUSTOMERUSER_ID)),
+                                                    array('vendor' => array('id' => TESTS_VENDOR_ID))
+                                                   ),
+                              'targetLanguage' => array('code' => 'de'),
+                              'startDate' => TESTS_TASK_STARTDATE,
+                              'dueDate' => TESTS_TASK_DUEDATE,
+                              'emailReminderDay' => 5
+                             );
     }
     
     public function tearDown()
@@ -164,12 +180,23 @@ class ProjectTaskTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Test Case for Create Project Task
+     */
+    public function testCreateProjectTask()
+    {
+        $projectTask = $this->client->createProjectTask(TESTS_PROJECT_ID, $this->params);
+        $this->assertTask($projectTask, TESTS_PROJECT_ID, $this->params);
+    }
+    
+    /**
      * Assert Task Object 
      * 
      * @param	\Cloudwords\Resources\Task $projectTask
-     * @param	int	projectId
+     * @param	int		projectId
+     * @param	array	params
+     * @void
      */
-    private function assertTask(\Cloudwords\Resources\Task $projectTask, $projectId = null)
+    private function assertTask(\Cloudwords\Resources\Task $projectTask, $projectId = null, $params = null)
     {
         $this->assertTrue($projectTask instanceof \Cloudwords\Resources\Task);
         $this->assertTrue(is_int($projectTask->getId()));
@@ -178,6 +205,25 @@ class ProjectTaskTest extends \PHPUnit_Framework_TestCase
         if ($projectTask->getProject() !== null && $projectId !== null) {
             $this->assertTrue($projectTask->getProject() instanceof \Cloudwords\Resources\Project);
             $this->assertEquals($projectId, $projectTask->getProject()->getId());
+        }
+        
+        // Compare Task object with request params
+        if ($params !== null) {
+            $pTtargetLanguage = $projectTask->getTargetLanguage();
+            $pTFollowers = $projectTask->getFollowers();
+            $startDate = new \DateTime($params['startDate']);
+            $dueDate = new \DateTime($params['dueDate']);
+            $this->assertEquals($projectTask->getName(), $params['name']);
+            $this->assertEquals($projectTask->getDescription(), $params['description']);
+            $this->assertEquals($projectTask->getEmailReminderDay(), $params['emailReminderDay']);
+            $this->assertEquals($projectTask->getStartDate(), $startDate);
+            $this->assertEquals($projectTask->getDueDate(), $dueDate);
+            $this->assertEquals($projectTask->getType()->getCode(), $params['type']);
+            $this->assertEquals($projectTask->getAssignee()->getCustomerUser()->getId(),
+                                $params['assignee']['customerUser']['id']);
+            $this->assertEquals($pTtargetLanguage['languageCode'], $params['targetLanguage']['code']);
+            $this->assertEquals($pTFollowers[0]->getCustomerUser()->getId(), $params['followers'][0]['customerUser']['id']);
+            $this->assertEquals($pTFollowers[1]->getVendor()->getId(), $params['followers'][1]['vendor']['id']);
         }
     }
 }
