@@ -21,6 +21,7 @@ defined('TESTS_BASE_API_URL') || define('TESTS_BASE_API_URL', 'https://api-stage
 defined('TESTS_API_VERSION') || define('TESTS_API_VERSION', '1');
 defined('TESTS_AUTH_TOKEN') || define('TESTS_AUTH_TOKEN', 'UserToken <ENTER_AUTHORIZATION_TOKEN_HERE>');
 defined('TESTS_PROJECT_ID') || define('TESTS_PROJECT_ID', '<ENTER_PROJECT_ID_HERE>');
+defined('TESTS_TASK_ID') || define('TESTS_TASK_ID', '<ENTER_TASK_ID_HERE>');
 
 require_once 'PHPUnit/Framework/TestCase.php';
 require_once TESTS_PATH . '/../src/Client.php';

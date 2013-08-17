@@ -109,7 +109,6 @@ class Task
             $this->dueDate = new \DateTime($params['dueDate']);
         }
         if( isset($params['emailReminderDay']) ) {
-//            $this->emailReminderDay = new \DateTime($params['emailReminderDay']);
             $this->emailReminderDay = $params['emailReminderDay'];
         }
         if( isset($params['targetLanguage']) ) {
