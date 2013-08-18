@@ -23,7 +23,7 @@ $projectId = 10173;
 //$taskId = 29585;
 //$taskId = '29587';
 $taskId = 29589;
-$fileUpload = 'files/PHP.zip';
+$fileUpload = 'files/attachment.zip';
 
 //print_r($client->updateProjectTask($projectId, $taskId, $params));
 
