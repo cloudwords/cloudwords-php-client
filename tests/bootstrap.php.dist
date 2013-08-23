@@ -29,6 +29,7 @@ defined('TESTS_TASK_DUEDATE') || define('TESTS_TASK_DUEDATE', '<ENTER_TASK_DUEDA
 defined('TESTS_TASK_ATTACHMENT_PATH') || define('TESTS_TASK_ATTACHMENT_PATH', TESTS_PATH . '/files/attachment.zip');
 defined('TESTS_TASK_ATTACHMENT_CONTENT') || define('TESTS_TASK_ATTACHMENT_CONTENT', 'attachment.txt');
 defined('TESTS_CURRENT_USER_ID') || define('TESTS_CURRENT_USER_ID', '<CURRENT_USER_ID_HERE>');
+defined('TESTS_DEPARTMENT_ID') || define('TESTS_DEPARTMENT_ID', '<DEPARTMENT_ID_HERE>');
 
 require_once 'PHPUnit/Framework/TestCase.php';
 require_once TESTS_PATH . '/../src/Client.php';

@@ -42,6 +42,45 @@ class UserTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Test Case for Get Available Followers
+     */
+    public function testGetAvailableFollowers()
+    {
+        $users = $this->client->getAvailableFollowers();
+        $this->assertTrue(is_array($users));
+        if (count($users) > 0) {
+            foreach ($users as $user)
+                $this->assertUser($user);
+        }        
+    }
+    
+    /**
+     * Test Case for Get Active User By Department Id
+     */
+    public function testGetActiveUserByDepartmentId()
+    {
+        $users = $this->client->getActiveUserByDepartmentId(TESTS_DEPARTMENT_ID);
+        $this->assertTrue(is_array($users));
+        if (count($users) > 0) {
+            foreach ($users as $user)
+                $this->assertUser($user);
+        }        
+    }
+    
+	/**
+     * Test Case for Get Available User By Department Id
+     */
+    public function testGetAvailableFollowersByDepartmentId()
+    {
+        $users = $this->client->getAvailableFollowersByDepartmentId(TESTS_DEPARTMENT_ID);
+        $this->assertTrue(is_array($users));
+        if (count($users) > 0) {
+            foreach ($users as $user)
+                $this->assertUser($user);
+        }
+    }
+    
+    /**
      * Assert User object
      * 
      * @param \Cloudwords\Resources\User	$user
