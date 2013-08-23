@@ -684,7 +684,7 @@ class Client
     /**
      * Get list of department
      */
-    public function getDepartment()
+    public function getDepartments()
     {
         $departmentList = array();
         $departmentsMetadata = $this->get($this->baseUrlWithVersion . '/department.json',
