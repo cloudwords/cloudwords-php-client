@@ -124,16 +124,16 @@ class Project
             $this->followers = $this->transformFollowerList($params['followers']);
         }
         if( isset($params['bidDueDate']) ) {
-            $this->bidDueDate = $params['bidDueDate'];
+            $this->bidDueDate = new \DateTime($params['bidDueDate']);
         }
         if( isset($params['deliveryDueDate']) ) {
-            $this->deliveryDueDate = $params['deliveryDueDate'];
+            $this->deliveryDueDate = new \DateTime($params['deliveryDueDate']);
         }
         if( isset($params['createdDate']) ) {
-            $this->createdDate = $params['createdDate'];
+            $this->createdDate = new \DateTime($params['createdDate']);
         }
         if( isset($params['bidSelectDeadlineDate']) ) {
-            $this->bidSelectDeadlineDate = $params['bidSelectDeadlineDate'];
+            $this->bidSelectDeadlineDate = new \DateTime($params['bidSelectDeadlineDate']);
         }
         if( isset($params['amount']) ) {
             $this->amount = $params['amount'];
