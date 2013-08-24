@@ -237,6 +237,72 @@ class ProjectTaskTest extends \PHPUnit_Framework_TestCase
         $this->assertTaskAttachment($taskAttachment);
     }
     
+
+    /**
+     * Test Case for Get All Project Tasks By Department Id
+     */
+    public function testGetAllProjectTasksByDepartmentId()
+    {
+        $projectTasks = $this->client->getAllProjectTasksByDepartmentId(TESTS_DEPARTMENT_ID);
+        if (empty($projectTasks))
+            return;
+        
+        // check the first project task
+        $this->assertTask($projectTasks[0]);
+    }
+    
+    /**
+     * Test Case for Get All Project Task With Status Open By Department Id 
+     */
+    public function testGetgetAllProjectTasksWithStatusOpenByDepartmentId()
+    {
+        $projectTasks = $this->client->getAllProjectTasksWithStatusByDepartmentId(TESTS_DEPARTMENT_ID, 'open');
+        if (empty($projectTasks))
+            return;
+        
+        // check the first project task
+        $this->assertTask($projectTasks[0]);
+    }
+    
+    /**
+     * Test Case for Get All Project Task With Status Closed By Department Id 
+     */
+    public function testGetgetAllProjectTasksWithStatusClosedByDepartmentId()
+    {
+        $projectTasks = $this->client->getAllProjectTasksWithStatusByDepartmentId(TESTS_DEPARTMENT_ID, 'closed');
+        if (empty($projectTasks))
+            return;
+        
+        // check the first project task
+        $this->assertTask($projectTasks[0]);
+    }
+    
+    /**
+     * Test Case for Get All Project Task With Status Rejected By Department Id 
+     */
+    public function testGetgetAllProjectTasksWithStatusRejectedByDepartmentId()
+    {
+        $projectTasks = $this->client->getAllProjectTasksWithStatusByDepartmentId(TESTS_DEPARTMENT_ID, 'rejected');
+        if (empty($projectTasks))
+            return;
+        
+        // check the first project task
+        $this->assertTask($projectTasks[0]);
+    }
+    
+    /**
+     * Test Case for Get All Project Task With Status Cancelled By Department Id 
+     */
+    public function testGetgetAllProjectTasksWithStatusCancelledByDepartmentId()
+    {
+        $projectTasks = $this->client->getAllProjectTasksWithStatusByDepartmentId(TESTS_DEPARTMENT_ID, 'cancelled');
+        if (empty($projectTasks))
+            return;
+        
+        // check the first project task
+        $this->assertTask($projectTasks[0]);
+    }
+    
     /**
      * Assert Task Object 
      * 
