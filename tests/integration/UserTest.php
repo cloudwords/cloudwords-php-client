@@ -68,7 +68,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     }
     
 	/**
-     * Test Case for Get Available User By Department Id
+     * Test Case for Get Available Followers By Department Id
      */
     public function testGetAvailableFollowersByDepartmentId()
     {
