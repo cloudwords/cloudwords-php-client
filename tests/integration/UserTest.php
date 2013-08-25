@@ -1,5 +1,5 @@
 <?php
-namespace Cloudwords\Tests;
+namespace Cloudwords\Tests\Integration;
 
 class UserTest extends \PHPUnit_Framework_TestCase
 {

@@ -315,8 +315,8 @@ class ProjectTaskTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($projectTask instanceof \Cloudwords\Resources\Task);
         $this->assertTrue(is_int($projectTask->getId()));
-        $this->assertTrue($projectTask->getType() instanceof \Cloudwords\Resources\CodeAndDisplay);
-        $this->assertTrue($projectTask->getStatus() instanceof \Cloudwords\Resources\CodeAndDisplay);
+            $this->assertTrue($projectTask->getType() instanceof \Cloudwords\Resources\CodeAndDisplay);
+            $this->assertTrue($projectTask->getStatus() instanceof \Cloudwords\Resources\CodeAndDisplay);
         if ($projectTask->getProject() !== null && $projectId !== null) {
             $this->assertTrue($projectTask->getProject() instanceof \Cloudwords\Resources\Project);
             $this->assertEquals($projectId, $projectTask->getProject()->getId());
