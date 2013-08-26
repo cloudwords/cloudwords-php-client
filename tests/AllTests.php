@@ -9,6 +9,7 @@ namespace Cloudwords\Tests;
  */
 
 require_once 'integration/AllTests.php';
+require_once 'ClientTest.php';
 
 class AllTests
 {
@@ -17,6 +18,7 @@ class AllTests
         $suite = new \PHPUnit_Framework_TestSuite();
         $suite->setName('All Cloudwords API PHP Client tests');
         $suite->addTestSuite(Integration\AllTests::suite());
+        $suite->addTestSuite('\Cloudwords\Tests\ClientTest');
         return $suite;
     }
 }

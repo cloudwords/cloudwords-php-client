@@ -12,10 +12,11 @@ class AllTests
     {
         $suite = new \PHPUnit_Framework_TestSuite();
         $suite->setName('All Cloudwords API PHP Client Resource Objects Tests');
+        $suite->addTestSuite('\Cloudwords\Tests\Integration\LanguageTest');
+        $suite->addTestSuite('\Cloudwords\Tests\Integration\ProjectTest');
         $suite->addTestSuite('\Cloudwords\Tests\Integration\UserTest');
         $suite->addTestSuite('\Cloudwords\Tests\Integration\DepartmentTest');
         $suite->addTestSuite('\Cloudwords\Tests\Integration\ProjectTaskTest');
-        $suite->addTestSuite('\Cloudwords\Tests\Integration\ProjectTest');
         return $suite;
     }
 }
