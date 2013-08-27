@@ -5,6 +5,7 @@ require_once 'DepartmentTest.php';
 require_once 'ProjectTaskTest.php';
 require_once 'ProjectTest.php';
 require_once 'UserTest.php';
+require_once 'LanguageTest.php';
 
 class AllTests
 {
