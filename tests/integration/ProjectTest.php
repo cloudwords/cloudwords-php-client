@@ -77,7 +77,7 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
      */
     public function testProjectMetadataRetrievalFailure()
     {
-      $this->client->getProjectSource($this->projectToRequestBidsFromCloudwords->getId());
+        $this->client->getProjectSource($this->projectToRequestBidsFromCloudwords->getId());
     }
 
     /**
@@ -207,9 +207,9 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
 	                           'deliveryDueDate' => '2051-01-01T00:00:00.000+0000'
                               );
         $this->assertProjectMetadata($project, $expectedState);
-        
         return $project->getId();
     }
+
 
     /**
      * Test case for updating a project successfully
@@ -235,21 +235,21 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
                         'deliveryDueDate' => '2051-01-01T00:00:00.000+0000'
                        );
         $expectedState = array('name' => $updatedName,
-                                'description' => $updatedDescription,
-                                'notes' => $updatedNotes,
-                                'projectStatusCode' => 'configured_project_details',
-                                'projectStatusDisplay' => 'Configured Project Name',
-                                'poNumber' => '123456',
-                                'amount' => 0,
-                                'sourceLanguageCode' => 'en',
-                                'sourceLanguageDisplay' => 'English',
-                                'targetLanguageCodes' => array('de', 'fr'),
-                                'targetLanguageDisplay' => array('German', 'French'),
-                                'intendedUseCode' => $updatedIntendedUseCode,
-                                'intendedUseDisplay' => $updatedIntendedUseDisplay,
-                                'bidDueDate' => '2050-01-01T00:00:00.000+0000',
-                                'deliveryDueDate' => '2051-01-01T00:00:00.000+0000'
-                                );
+                               'description' => $updatedDescription,
+                               'notes' => $updatedNotes,
+                               'projectStatusCode' => 'configured_project_details',
+                               'projectStatusDisplay' => 'Configured Project Name',
+                               'poNumber' => '123456',
+                               'amount' => 0,
+                               'sourceLanguageCode' => 'en',
+                               'sourceLanguageDisplay' => 'English',
+                               'targetLanguageCodes' => array('de', 'fr'),
+                               'targetLanguageDisplay' => array('German', 'French'),
+                               'intendedUseCode' => $updatedIntendedUseCode,
+                               'intendedUseDisplay' => $updatedIntendedUseDisplay,
+                               'bidDueDate' => '2050-01-01T00:00:00.000+0000',
+                               'deliveryDueDate' => '2051-01-01T00:00:00.000+0000'
+                              );
         
         try {
             $project = $this->client->updateProject($params);
@@ -258,13 +258,12 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         }
         
         $this->assertProjectMetadata($project, $expectedState);
-        return $project->getId();
     }
     
     /**
      * Test case for uploading a project source file successfully
      *
-     * @depends testProjectUpdatedSuccessfully
+     * @depends	testProjectRetrievedSuccessfully
      */
     public function testUploadProjectSourceFileSuccessful($projectId)
     {
@@ -277,17 +276,17 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $expectedState = array('filename' => basename(TESTS_TASK_ATTACHMENT_PATH),
                                'sizeInKilobytes' => TESTS_TASK_ATTACHEMENT_SIZE_KB,
                                'fileContents' => TESTS_TASK_ATTACHMENT_CONTENT,
-                               'contentPath'  => TESTS_BASE_API_URL . '/' . TESTS_API_VERSION . '/project/' . $projectId . '/file/source/content',
-                               'path' =>  TESTS_BASE_API_URL . '/' . TESTS_API_VERSION  . '/project/' . $projectId . '/file/source.json');
+                               'contentPath'  => TESTS_BASE_API_URL . '/' . TESTS_API_VERSION
+                                              .  '/project/' . $projectId . '/file/source/content',
+                               'path' => TESTS_BASE_API_URL . '/' . TESTS_API_VERSION
+                                      .  '/project/' . $projectId . '/file/source.json');
         $this->assertProjectSourceMetadata($metadata, $expectedState);
-
-        return $projectId;
     }
   
     /**
      * Test case for getting project source metadata 
      *
-     * @depends testUploadProjectSourceFileSuccessful
+     * @depends	testProjectRetrievedSuccessfully
      */
     public function testGetProjectSourceMetadata($projectId)
     {
@@ -303,14 +302,12 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
                                'contentPath'  => TESTS_BASE_API_URL . '/' . TESTS_API_VERSION . '/project/' . $projectId . '/file/source/content',
                                'path' =>  TESTS_BASE_API_URL . '/' . TESTS_API_VERSION  . '/project/' . $projectId . '/file/source.json');
         $this->assertProjectSourceMetadata($metadata, $expectedState);
-        
-        return $projectId;
     }
 
     /**
      * Test Case for downloading source file
      *  
-     * @depends	testGetProjectSourceMetadata
+     * @depends	testProjectRetrievedSuccessfully
      */
     public function testDownloadSourceFileSuccessful($projectId)
     {
@@ -324,6 +321,140 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         file_put_contents($sourceFile, $source);
         $this->assertFileExists($sourceFile);
         $this->assertTrue(filesize($sourceFile) > 0);
+    }
+    
+
+    /**
+     * Test case for uploading a project reference successfully
+     *
+     * @depends	testProjectRetrievedSuccessfully
+     */
+    public function testUploadProjectReferenceFileSuccessful($projectId)
+    {
+	    try {
+	        $reference = $this->client->uploadProjectReference($projectId, TESTS_TASK_ATTACHMENT_PATH);
+	    } catch(\Cloudwords\Exception $e) {
+	        echo $e->getErrorMessage();
+	    }
+
+        $expectedState = array('filename' => basename(TESTS_TASK_ATTACHMENT_PATH),
+                               'sizeInKilobytes' => TESTS_TASK_ATTACHEMENT_SIZE_KB,
+                               'fileContents' => TESTS_TASK_ATTACHMENT_CONTENT,
+                               'contentPath'  => TESTS_BASE_API_URL . '/' . TESTS_API_VERSION . '/project/'
+                                              .  $projectId . '/file/reference/' . $reference->getId() . '/content',
+                               'path' => TESTS_BASE_API_URL . '/' . TESTS_API_VERSION  . '/project/'
+                                      .  $projectId . '/file/reference/' . $reference->getId() . '.json'
+                              );
+	    $this->assertProjectReferenceMetadata($reference, $expectedState);
+    }
+
+    /**
+     * Test case for getting a project reference
+     *
+     * @depends	testProjectRetrievedSuccessfully
+     */
+    public function testGetProjectReferences($projectId)
+    {
+	    try {
+            $references = $this->client->getProjectReferences($projectId);
+	    } catch(\Cloudwords\Exception $e) {
+            echo $e->getErrorMessage();
+	    }
+
+        $return = array($projectId);
+        if (count($references) > 0) {
+	        $expectedState = array('filename' => basename(TESTS_TASK_ATTACHMENT_PATH),
+	                               'sizeInKilobytes' => TESTS_TASK_ATTACHEMENT_SIZE_KB,
+	                               'fileContents' => TESTS_TASK_ATTACHMENT_CONTENT,
+	                               'contentPath'  => TESTS_BASE_API_URL . '/' . TESTS_API_VERSION . '/project/'
+	                                              .  $projectId . '/file/reference/' . $references[0]->getId() . '/content',
+	                               'path' => TESTS_BASE_API_URL . '/' . TESTS_API_VERSION  . '/project/'
+	                                      .  $projectId . '/file/reference/' . $references[0]->getId() . '.json'
+	                              );
+		    $this->assertProjectReferenceMetadata($references[0], $expectedState);
+            $return[] = $references[0]->getId();
+        }
+
+        return $return;
+    }
+
+    /**
+     * Test case for getting a project reference
+     *
+     * @depends	testGetProjectReferences
+     */
+    public function testGetProjectReference($params)
+    {
+        // check documentId in params[1]
+        if (! isset($params[1])) {
+            return;
+        } else {
+            // extract params
+            list($projectId, $documentId) = $params;
+        }
+
+	    try {
+	        $reference = $this->client->getProjectReference($projectId, $documentId);
+	    } catch(\Cloudwords\Exception $e) {
+	        echo $e->getErrorMessage();
+	    }
+
+	    $expectedState = array('filename' => basename(TESTS_TASK_ATTACHMENT_PATH),
+	                           'sizeInKilobytes' => TESTS_TASK_ATTACHEMENT_SIZE_KB,
+	                           'fileContents' => TESTS_TASK_ATTACHMENT_CONTENT,
+	                           'contentPath'  => TESTS_BASE_API_URL . '/' . TESTS_API_VERSION . '/project/'
+	                                          .  $projectId . '/file/reference/' . $reference->getId() . '/content',
+	                           'path' => TESTS_BASE_API_URL . '/' . TESTS_API_VERSION  . '/project/'
+	                                  .  $projectId . '/file/reference/' . $reference->getId() . '.json'
+	                          );
+	    $this->assertProjectReferenceMetadata($reference, $expectedState);
+
+        return $params;
+    }
+
+    /**
+     * Test case for downloading project reference file
+     *
+     * @depends	testGetProjectReference
+     */
+    public function testDownloadReferenceFile($params)
+    {
+        list($projectId, $documentId) = $params;
+	    try {
+	        $reference = $this->client->downloadReferenceFile($projectId, $documentId);
+	    } catch(\Cloudwords\Exception $e) {
+	        echo $e->getErrorMessage();
+	    }
+
+        $referenceFile = TESTS_DOWNLOADED_REFERENCE_FILE_PATH . '/' . time() . '.zip';
+	    file_put_contents($referenceFile, $reference);
+	    $this->assertFileExists($referenceFile);
+	    $this->assertTrue(filesize($referencefile) > 0);
+    }
+
+    /**
+     * Test case for updating project reference file
+     *
+     * @depends	testGetProjectReference
+     */
+    public function testUpdateProjectReferenceSuccessful($params)
+    {
+        list($projectId, $documentId) = $params;
+	    try {
+	        $reference = $this->client->updateProjectReference($projectId, $documentId, TESTS_TASK_ATTACHMENT_PATH);
+	    } catch(\Cloudwords\Exception $e) {
+	        echo $e->getErrorMessage();
+	    }
+
+	    $expectedState = array('filename' => basename(TESTS_TASK_ATTACHMENT_PATH),
+	                           'sizeInKilobytes' => TESTS_TASK_ATTACHEMENT_SIZE_KB,
+	                           'fileContents' => TESTS_TASK_ATTACHMENT_CONTENT,
+	                           'contentPath'  => TESTS_BASE_API_URL . '/' . TESTS_API_VERSION . '/project/'
+	                                          .  $projectId . '/file/reference/' . $reference->getId() . '/content',
+	                           'path' => TESTS_BASE_API_URL . '/' . TESTS_API_VERSION  . '/project/'
+	                                  .  $projectId . '/file/reference/' . $reference->getId() . '.json'
+	                          );
+	    $this->assertProjectReferenceMetadata($reference, $expectedState);
     }
     
 	/**
@@ -461,7 +592,6 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
     private function assertProjectReferenceMetadata($metadata, $expectedState)
     {
 	    $this->assertNotNull($metadata);
-	    $this->assertEquals($expectedState['id'], $metadata->getId());
 	    $this->assertEquals($expectedState['filename'], $metadata->getFilename());
 	    $this->assertEquals($expectedState['sizeInKilobytes'], $metadata->getSizeInKilobytes());
 	    $this->assertTrue(strstr($metadata->getFileContents(), $expectedState['fileContents']) != '');
