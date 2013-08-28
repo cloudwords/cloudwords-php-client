@@ -433,31 +433,6 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * Request bid for project
-     * 
-     * @depends	testProjectRetrievedSuccessfully
-     */
-    public function testRequestBidsForProjectFromCloudwords($projectId)
-    {
-        $preferredVendors = array(array('id' => TESTS_VENDOR_ID));
-        $doLetCloudwordsChoose = false;
-        $doAutoSelectBidFromVendor = false;
-        
-        try {
-            $bidRequest = $this->client->requestBidsForProject($projectId, $preferredVendors, $doLetCloudwordsChoose, $doAutoSelectBidFromVendor);
-        } catch(\Cloudwords\Exception $e) {
-            echo $e->getErrorMessage(), PHP_EOL;
-        }
-        
-        $this->assertTrue($bidRequest instanceof \Cloudwords\Resources\BidRequest);
-        $this->assertFalse($bidRequest->getDoLetCloudwordsChoose());
-        $this->assertFalse($bidRequest->getDoAutoSelectBidFromVendor());
-        $this->assertTrue(is_array($bidRequest->getPreferredVendors()));
-        $this->assertEquals($bidRequest->getPath(), TESTS_BASE_API_URL . '/' . TESTS_API_VERSION . '/project/'
-                                                  . $projectId . '/bid-request/current.json');
-    }
-
-    /**
      * Test case for updating project reference file
      *
      * @depends	testGetProjectReference
@@ -480,6 +455,181 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
 	                                  .  $projectId . '/file/reference/' . $reference->getId() . '.json'
 	                          );
 	    $this->assertProjectReferenceMetadata($reference, $expectedState);
+    }
+    
+    /**
+     * Request bid for project
+     * 
+     * @depends	testProjectRetrievedSuccessfully
+     */
+    public function testRequestBidsForProjectFromCloudwords($projectId)
+    {
+        $preferredVendors = array();
+        $doLetCloudwordsChoose = true;
+        $doAutoSelectBidFromVendor = false;
+        try {
+            $bidRequest = $this->client->requestBidsForProject($projectId, $preferredVendors, $doLetCloudwordsChoose, $doAutoSelectBidFromVendor);
+        } catch(\Cloudwords\Exception $e) {
+            echo $e->getErrorMessage(), PHP_EOL;
+        }
+        
+        $this->assertTrue($bidRequest instanceof \Cloudwords\Resources\BidRequest);
+        $this->assertTrue($bidRequest->getDoLetCloudwordsChoose());
+        $this->assertFalse($bidRequest->getDoAutoSelectBidFromVendor());
+        $this->assertEquals($bidRequest->getPath(), TESTS_BASE_API_URL . '/' . TESTS_API_VERSION . '/project/'
+                                                  . $projectId . '/bid-request/current.json');
+        $this->assertTrue(is_array($bidRequest->getPreferredVendors()));
+        $this->assertEquals($preferredVendors, $bidRequest->getPreferredVendors());
+    }
+
+    /**
+     * Get current bid request for project
+     * 
+     * @depends	testProjectRetrievedSuccessfully
+     */
+    public function testGetCurrentBidRequestForProject($projectId)
+    {
+        try {
+            $bidRequest = $this->client->getCurrentBidRequestForProject($projectId);
+        } catch(\Cloudwords\Exception $e) {
+            echo $e->getErrorMessage();
+            echo 'current bid request', PHP_EOL;
+        }
+        
+        $expectedState = array('do_let_cloudwords_choose' => true,
+                               'do_auto_select_bid_from_vendor' => false,
+                               'path' => TESTS_BASE_API_URL . '/' . TESTS_API_VERSION
+                                      . '/project/' . $projectId . '/bid-request/current.json',
+                               );
+        $this->assertBidRequestMetadata($bidRequest, $expectedState);
+    }
+    
+    /**
+     * Test get all submitted bids
+     * 
+     * @depends	testProjectRetrievedSuccessfully
+     */    
+    public function testGetAllBids($projectId)
+    {
+        try {
+            $submittedBids = $this->client->getBids($projectId);
+        } catch(\Cloudwords\Exception $e) {
+            echo $e->getErrorMessage();
+        }
+        
+        if (empty($submittedBids))
+            return;
+        
+        $submittedBid = $submittedBids[0];
+        $expectedState = array('bid_status_code' => 'waiting_for_vendor',
+                               'bid_status_display' => 'Request Pending',
+                               'bid_description' => '',
+                               'bid_amount' => 0
+                               );
+        $this->assertBidMetadata($submittedBid, $expectedState);
+        
+        return array($projectId, $submittedBid->getId());
+    }
+    
+    /**
+     * Test get all submitted bids
+     * 
+     * @depends	testGetAllBids
+     */    
+    public function testGetBid($params)
+    {
+        if (! is_array($params))
+            return;
+            
+        list($projectId, $bidId) = $params;
+        
+	    try {
+	        $submittedBid = $this->client->getBid($projectId, $bidId);
+	    } catch(\Cloudwords\Exception $e) {
+	        echo $e->getErrorMessage();
+	    }
+
+        $expectedState = array('bid_status_code' => 'waiting_for_vendor',
+                               'bid_status_display' => 'Request Pending',
+                               'bid_description' => '',
+                               'bid_amount' => 0
+                               );
+	    $this->assertBidMetadata($submittedBid, $expectedState);
+	}
+	
+	/**
+     * Test get all submitted bids
+     * 
+     * @depends	testGetAllSubmittedBids
+     *
+    public function testSelectWinningBid($params)
+    {
+        if (! is_array($params))
+            return;
+            
+        list($projectId, $bidId) = $params;
+        
+        try {
+            $winningBid = $this->client->selectWinningBid($projectId, $bidId);
+        } catch(\Cloudwords\Exception $e) {
+            echo $e->getErrorMessage();
+        }
+
+        $expectedState = array(//'vendor_id' => TESTS_VENDOR_ID,
+                               'winning_bid_id' => $bidId,
+                               //'path' => TESTS_BASE_API_URL . '/' . TESTS_API_VERSION
+                               //       . '/vendor/' . TESTS_VENDOR_ID . '.json',
+                               'bid_status_code' => 'waiting_for_vendor',
+                               'bid_status_display' => 'Request Pending',
+                               'bid_description' => '',
+                               'bid_amount' => 0
+                               );
+        $this->assertBidRequestMetadata($winningBid, $expectedState);
+    }
+    */
+    
+    /**
+     * Assert bid metadata
+     * 
+     * @params	\Cloudwords\Resources\Bid	$metadata
+     * @params	array	$expectedState
+     */ 
+    private function assertBidMetadata($metadata, $expectedState)
+    {
+        $this->assertTrue($metadata instanceof \Cloudwords\Resources\Bid);
+	    $this->assertNotNull($metadata);
+	    
+	    if (isset($expectedState['vendor_id']))
+            $this->assertEquals($expectedState['vendor_id'], $metadata->getVendor()->getId());
+            
+        if (isset($expectedState['vendor_path']))
+	        $this->assertEquals($expectedState['vendor_path'], $metadata->getVendor()->getPath());
+	        
+	    $this->assertEquals($expectedState['bid_status_code'], $metadata->getStatus()->getCode());
+	    $this->assertEquals($expectedState['bid_status_display'], $metadata->getStatus()->getDisplay());
+	    $this->assertEquals($expectedState['bid_description'], $metadata->getDescription());
+	    $this->assertEquals($expectedState['bid_amount'], $metadata->getAmount());
+    }
+    
+    /**
+     * Assert Bid Request Object
+     * 
+     * @params	\Cloudwords\Resources\BidRequest	$metadata
+     * @param array $expectedState
+     */
+    private function assertBidRequestMetadata($metadata, $expectedState)
+    {
+        $this->assertEquals($expectedState['do_let_cloudwords_choose'], $metadata->getDoLetCloudwordsChoose());
+        $this->assertEquals($expectedState['do_auto_select_bid_from_vendor'], $metadata->getDoAutoSelectBidFromVendor());
+        $this->assertEquals($expectedState['path'], $metadata->getPath());
+        if(isset($expectedState['preferred_vendor'])) {
+            $preferredVendors = $metadata->getPreferredVendors();
+            $this->assertEquals($expectedState['preferred_vendor']['vendor_id'], $preferredVendors[0]->getId());
+            $this->assertEquals($expectedState['preferred_vendor']['vendor_path'], $preferredVendors[0]->getPath());
+        }
+        
+        if (isset($expectedState['winning_bid_id']))
+            $this->assertEquals($expectedState['winning_bid_id'], $metadata->getWinningBidId());
     }
     
 	/**
@@ -655,4 +805,6 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedState['languageDisplay'], $metadata->getLang()->getDisplay());
         $this->assertEquals($expectedState['languageCode'], $metadata->getLang()->getLanguageCode());
     }
+
+    
 }
