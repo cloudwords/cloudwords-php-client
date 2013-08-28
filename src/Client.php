@@ -193,15 +193,15 @@ class Client
             throw new ApiException(ApiException::REQUEST_EXCEPTION, $params);
         }
 
-        $http_status_code = curl_getinfo($conn, CURLINFO_HTTP_CODE);
-        if( $http_status_code === 200 || $http_status_code === 201) {
+        $httpStatusCode = curl_getinfo($conn, CURLINFO_HTTP_CODE);
+        if( $httpStatusCode === 200 || $httpStatusCode === 201) {
             return $data;
         } else {
-            $error_response = json_decode($data);
-            $params = array('http_status_code' => $http_status_code,
+            $errorResponse = json_decode($data);
+            $params = array('http_status_code' => $httpStatusCode,
                             'request_type'  => $requestType,
                             'request_url'   => $url,
-                            'error_message' => $error_response->{'error'}
+                            'error_message' => $errorResponse->error
                            );
             throw new ApiException(ApiException::API_EXCEPTION, $params);
         }

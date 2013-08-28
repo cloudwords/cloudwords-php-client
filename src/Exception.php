@@ -39,7 +39,7 @@ class Exception extends \Exception
         } else if( $exceptionType == self::REQUEST_EXCEPTION ) {
             $this->errorMessage = $params['error_message'];
         } else if( $exceptionType == self::DEPENDENCY_EXCEPTION ) {
-            $this->errorMessage = $params['errorMessage'];
+            $this->errorMessage = $params['error_message'];
         }
     }
 

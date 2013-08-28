@@ -429,7 +429,32 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $referenceFile = TESTS_DOWNLOADED_REFERENCE_FILE_PATH . '/' . time() . '.zip';
 	    file_put_contents($referenceFile, $reference);
 	    $this->assertFileExists($referenceFile);
-	    $this->assertTrue(filesize($referencefile) > 0);
+	    $this->assertTrue(filesize($referenceFile) > 0);
+    }
+    
+    /**
+     * Request bid for project
+     * 
+     * @depends	testProjectRetrievedSuccessfully
+     */
+    public function testRequestBidsForProjectFromCloudwords($projectId)
+    {
+        $preferredVendors = array(array('id' => TESTS_VENDOR_ID));
+        $doLetCloudwordsChoose = false;
+        $doAutoSelectBidFromVendor = false;
+        
+        try {
+            $bidRequest = $this->client->requestBidsForProject($projectId, $preferredVendors, $doLetCloudwordsChoose, $doAutoSelectBidFromVendor);
+        } catch(\Cloudwords\Exception $e) {
+            echo $e->getErrorMessage(), PHP_EOL;
+        }
+        
+        $this->assertTrue($bidRequest instanceof \Cloudwords\Resources\BidRequest);
+        $this->assertFalse($bidRequest->getDoLetCloudwordsChoose());
+        $this->assertFalse($bidRequest->getDoAutoSelectBidFromVendor());
+        $this->assertTrue(is_array($bidRequest->getPreferredVendors()));
+        $this->assertEquals($bidRequest->getPath(), TESTS_BASE_API_URL . '/' . TESTS_API_VERSION . '/project/'
+                                                  . $projectId . '/bid-request/current.json');
     }
 
     /**
@@ -480,7 +505,7 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($project->getBidSelectDeadlineDate() instanceof \DateTime);
         $this->assertTrue(is_int($project->getAmount()));
         if ($project->getDepartment() instanceof \Cloudwords\Resources\Department) {
-            $this->assertEquals($project->getDepartment()->getId(), TESTS_DEPARTMENT_ID);
+            $this->assertTrue(is_int($project->getDepartment()->getId()));
             $this->assertTrue(is_string($project->getDepartment()->getName()));
         }
     }

@@ -1,7 +1,9 @@
 <?php
 namespace Cloudwords\Resources;
 
-use Vendor;
+require_once 'Vendor.php';
+
+use \Cloudwords\Resources\Vendor as Vendor;
 
 /**
  * Represents a request for bids to translate the source content for a given Cloudwords
@@ -12,7 +14,7 @@ use Vendor;
  * @author Douglas Kim <doug@cloudwords.com>
  * @since 1.0
  */
-class BidRequest 
+class BidRequest
 {
     private $createdDate;
 
