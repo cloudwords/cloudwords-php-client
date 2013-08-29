@@ -2,8 +2,10 @@
 namespace Cloudwords\Resources;
 
 require_once 'Language.php';
+require_once 'CodeAndDisplay.php';
 
-use Cloudwords\Resources\Language as Language;
+use Cloudwords\Resources\Language as Language,
+    Cloudwords\Resources\CodeAndDisplay as CodeAndDisplay;
 
 /**
  * Represents the metadata around a file stored in Cloudwords. The type of file could be the source
@@ -28,12 +30,15 @@ class File
 
     private $createdDate;
 
+    private $status;
+    
     private $path;
 
     /**
      * Constructor used to create a Cloudwords file resource
      *
      * - id: int The file resource id
+     * - status: CodeAndDisplay object
      * - filename: string The filename of the file resource
      * - lang: array The language of the file resource that contains a display name and language code
      * - contentPath: string The content path to the file resource
@@ -48,6 +53,9 @@ class File
     {
         if( isset($params['id']) ) {
             $this->id = $params['id'];
+        }
+        if( isset($params['status']) ) {
+            $this->status = new CodeAndDisplay($params['status']);
         }
         if( isset($params['filename']) ) {
             $this->filename = $params['filename'];
@@ -225,6 +233,26 @@ class File
     public function setPath($path)
     {
         $this->path = $path;
+        return $this;
+    }
+    
+	/**
+     * Get status
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set status
+     * 
+     * @param	\Cloudwords\Resources\CodeAndDisplay	$status
+     * @return	$this
+     */
+    public function setStatus(CodeAndDisplay $status)
+    {
+        $this->status = $status;
         return $this;
     }
 }
